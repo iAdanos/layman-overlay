@@ -29,8 +29,8 @@ pkg_setup() {
 	linux-mod_pkg_setup
 
 	local CONFIG_CHECK="FB_CFB_FILLRECT FB_CFB_COPYAREA FB_CFB_IMAGEBLIT
-	~FRAMEBUFFER_CONSOLE I2C_ALGOBIT CONFIG_AGP"
-	local ERROR_CONFIG_AGP="You don't have CONFIG_AGP enabled in you kernel config."
+	~FRAMEBUFFER_CONSOLE I2C_ALGOBIT AGP"
+	local ERROR_AGP="You don't have CONFIG_AGP enabled in you kernel config."
 	local ERROR_FB_CFB_FILLRECT="You don't have CONFIG_FB_CFB_FILLRECT enabled in you kernel config. To do this either hack drivers/video/Kconfig or enable an FB driver that pulls it in (for example VESAFB)"
 	local ERROR_FB_CFB_COPYAREA="You don't have CONFIG_FB_CFB_FILLRECT enabled in you kernel config. To do this either hack drivers/video/Kconfig or enable an FB driver that pulls it in (for example VESAFB)"
 	local ERROR_FB_CFB_IMAGEBLIT="You don't have CONFIG_FB_CFB_IMAGEBLIT enabled in you kernel config. To do this either hack drivers/video/Kconfig or enable an FB driver that pulls it in (for example VESAFB)"
