@@ -34,7 +34,7 @@ src_prepare() {
 #	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-comment_unused.patch"
 #	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-greedy.patch"
 #	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-loader.patch"
-	epatch "${FILESDIR}/stubs.patch"
+#	epatch "${FILESDIR}/stubs.patch"
 	epatch "${FILESDIR}/01_disable_lid_timer.patch"
 	epatch "${FILESDIR}/psb_xvtempfix.patch"
 	epatch "${FILESDIR}/psb_mixed.patch"
