@@ -47,7 +47,7 @@ src_prepare()
        epatch "${FILESDIR}/02_agp_memory.dpatch"
        epatch "${FILESDIR}/04_drmpsb.dpatch"
        epatch "${FILESDIR}/05_edid-crash.dpatch"
-       epatch "${FILESDIR}/06_i2c-intelfb.dpatch"
+#       epatch "${FILESDIR}/06_i2c-intelfb.dpatch"
        epatch "${FILESDIR}/08_irqreturn.dpatch"
        epatch "${FILESDIR}/use_udev.dpatch"
        epatch "${FILESDIR}/10_change_prefix.dpatch"
