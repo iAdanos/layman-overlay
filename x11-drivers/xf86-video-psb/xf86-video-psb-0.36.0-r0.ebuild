@@ -40,9 +40,9 @@ src_prepare() {
 	epatch "${FILESDIR}/psb_mixed.patch"
 	epatch "${FILESDIR}/HDMI-fix.patch"
 	epatch "${FILESDIR}/root-gc.patch"
-#	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-mibank.patch"
-#	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-symbols.patch"
-#	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-null.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-mibank.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-symbols.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-null.patch"
 	eautoreconf
 }
 
