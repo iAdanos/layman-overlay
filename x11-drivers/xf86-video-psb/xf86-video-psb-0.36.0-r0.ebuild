@@ -28,7 +28,7 @@ RDEPEND="$DEPEND
 S=${WORKDIR}/xserver-xorg-video-psb-0.36.0
 
 src_prepare() {
-	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-ignoreacpi.patch"
+#	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-ignoreacpi.patch"
 	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-xserver17.patch"
 	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-assert.patch"
 	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-comment_unused.patch"
