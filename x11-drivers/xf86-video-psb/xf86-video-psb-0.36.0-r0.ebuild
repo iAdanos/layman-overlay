@@ -28,21 +28,21 @@ RDEPEND="$DEPEND
 S=${WORKDIR}/xserver-xorg-video-psb-0.36.0
 
 src_prepare() {
-	epatch "${FILESDIR}/org-x11-drv-psb-0.31.0-ignoreacpi.patch"
-	epatch "${FILESDIR}/org-x11-drv-psb-0.31.0-xserver17.patch"
-	epatch "${FILESDIR}/server-xorg-video-psb-0.31.0-assert.patch"
-	epatch "${FILESDIR}/server-xorg-video-psb-0.31.0-comment_unused.patch"
-	epatch "${FILESDIR}/server-xorg-video-psb-0.31.0-greedy.patch"
-	epatch "${FILESDIR}/server-xorg-video-psb-0.31.0-loader.patch"
-	epatch "${FILESDIR}/tubs.patch"
-	epatch "${FILESDIR}/1_disable_lid_timer.patch"
-	epatch "${FILESDIR}/sb_xvtempfix.patch"
-	epatch "${FILESDIR}/sb_mixed.patch"
-	epatch "${FILESDIR}/DMI-fix.patch"
-	epatch "${FILESDIR}/oot-gc.patch"
-	epatch "${FILESDIR}/org-x11-drv-psb-0.32.0-mibank.patch"
-	epatch "${FILESDIR}/org-x11-drv-psb-0.32.0-symbols.patch"
-	epatch "${FILESDIR}/org-x11-drv-psb-0.32.0-null.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-ignoreacpi.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-xserver17.patch"
+	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-assert.patch"
+	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-comment_unused.patch"
+	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-greedy.patch"
+	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-loader.patch"
+	epatch "${FILESDIR}/stubs.patch"
+	epatch "${FILESDIR}/01_disable_lid_timer.patch"
+	epatch "${FILESDIR}/psb_xvtempfix.patch"
+	epatch "${FILESDIR}/psb_mixed.patch"
+	epatch "${FILESDIR}/HDMI-fix.patch"
+	epatch "${FILESDIR}/root-gc.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-mibank.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-symbols.patch"
+	epatch "${FILESDIR}/xorg-x11-drv-psb-0.32.0-null.patch"
 	eautoreconf
 }
 
