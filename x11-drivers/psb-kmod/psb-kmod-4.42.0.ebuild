@@ -56,6 +56,7 @@ src_prepare()
        epatch "${FILESDIR}/12_psb-If-not-asking-for-debug-is-an-error-I-want-to-be.dpatch"
        epatch "${FILESDIR}/rt-kernel.dpatch"
        epatch "${FILESDIR}/2.6.36-ioctl.dpatch"
+       epatch "${FILESDIR}/psb_driver.xf86AddModuleInfo.patch"
 
 }
 
