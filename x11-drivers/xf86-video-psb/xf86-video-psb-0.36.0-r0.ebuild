@@ -29,7 +29,6 @@ S=${WORKDIR}/xserver-xorg-video-psb
 
 src_prepare() {
 	epatch "${FILESDIR}/1.patch"
-	epatch "${FILESDIR}/2.patch"
 	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-ignoreacpi.patch"
 	epatch "${FILESDIR}/xorg-x11-drv-psb-0.31.0-xserver17.patch"
 	epatch "${FILESDIR}/xserver-xorg-video-psb-0.31.0-assert.patch"
