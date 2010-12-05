@@ -4,6 +4,7 @@
 
 EAPI="2"
 
+inherit autotools
 
 DESCRIPTION="glx for the intel gma500 (poulsbo)"
 HOMEPAGE="https://launchpad.net/~gma500/+archive/ppa/+packages"
