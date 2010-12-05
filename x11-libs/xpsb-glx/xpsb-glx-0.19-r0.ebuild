@@ -18,19 +18,33 @@ IUSE=""
 DEPEND=""
 RDEPEND=""
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}/mesa"
+
+src_prepare() {
+	eautoreconf
+}
+src_configure() {
+	econf
+}
+
+src_compile() {
+	emake
+}
 
 src_install() {
+
+	emake install DESTDIR="${D}" || die "Make failed"
+
 	insopts -m0755
 
 	insinto /usr/lib/dri
-	doins dri/psb_dri.so
+	doins ../dri/psb_dri.so
 
 	insinto /usr/lib/va/drivers
-	doins dri/psb_drv_video.la
-	doins dri/psb_drv_video.so
+	doins ../dri/psb_drv_video.la
+	doins ../dri/psb_drv_video.so
 
 	insinto /usr/lib/xorg/modules/drivers
-	doins drivers/Xpsb.la
+	doins ../drivers/Xpsb.la
 	doins drivers/Xpsb.so
 }
