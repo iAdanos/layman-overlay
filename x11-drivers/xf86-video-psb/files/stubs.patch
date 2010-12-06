@@ -6,14 +6,14 @@ diff -p -up xserver-xorg-video-psb-0.31.0/src/psb_driver.c.orig xserver-xorg-vid
  }
  
 +/* removed in Xserver 1.7, add it again so that proprietary Xpsb can be loaded */
-+void
++extern void
 +xf86AddModuleInfo(pointer info, pointer module)
 +{
 +}
 +
 +/* removed in mesa, add it again so that proprietary Xpsb can be loaded */
 +typedef void (*_glapi_warning_func)(void *ctx, const char *str, ...);
-+void
++extern void
 +_glapi_set_warning_func( _glapi_warning_func func )
 +{
 +}
