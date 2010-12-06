@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit autotools
+#inherit autotools
 
 DESCRIPTION="glx for the intel gma500 (poulsbo)"
 HOMEPAGE="https://launchpad.net/~gma500/+archive/ppa/+packages"
@@ -19,7 +19,7 @@ IUSE=""
 DEPEND=""
 RDEPEND=""
 
-S="${WORKDIR}/${PN}/mesa"
+S="${WORKDIR}/${PN}"
 
 #src_prepare() {
 #	eautoreconf
