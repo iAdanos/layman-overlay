@@ -21,20 +21,20 @@ RDEPEND=""
 
 S="${WORKDIR}/${PN}/mesa"
 
-src_prepare() {
-	eautoreconf
-}
-src_configure() {
-	econf
-}
+#src_prepare() {
+#	eautoreconf
+#}
+#src_configure() {
+#	econf
+#}
 
-src_compile() {
-	emake
-}
+#src_compile() {
+#	emake
+#}
 
 src_install() {
 
-	emake install DESTDIR="${D}" || die "Make failed"
+#	emake install DESTDIR="${D}" || die "Make failed"
 
 	insopts -m0755
 
