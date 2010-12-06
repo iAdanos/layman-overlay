@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit autotools
+inherit autotools flag-o-matic
 
 DESCRIPTION="xorg driver for the intel gma500 (poulsbo)"
 HOMEPAGE="https://launchpad.net/~gma500/+archive/ppa/+packages"
@@ -47,13 +47,11 @@ src_prepare() {
 }
 
 src_configure() {
-	replace-flags "-fvisibility=hidden" "-fvisibility=default"
 	econf
 }
 
 src_compile() {
 	replace-flags "-fvisibility=hidden" "-fvisibility=default"
-
 	emake
 }
 
