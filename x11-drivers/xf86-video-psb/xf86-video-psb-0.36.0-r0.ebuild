@@ -51,7 +51,7 @@ src_configure() {
 }
 
 src_compile() {
-	replace-flags "-fvisibility=hidden" "-fvisibility=default"
+	replace-flags -fvisibility=hidden -fvisibility=default
 	emake
 }
 
