@@ -47,10 +47,12 @@ src_prepare() {
 }
 
 src_configure() {
+	append-flags "-fvisibility=default"
 	econf
 }
 
 src_compile() {
+	append-flags "-fvisibility=default"
 	emake
 }
 
