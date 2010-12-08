@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/psb-firmware/psb-firmware-0.30_p3.ebuild,v 1.1 2009/09/13 20:10:19 patrick Exp $
+# $Header: http://www.freifalt.com - lukas.elsner@freifalt.com $
 
 
 DESCRIPTION="firmware for the intel gma500 (poulsbo)"

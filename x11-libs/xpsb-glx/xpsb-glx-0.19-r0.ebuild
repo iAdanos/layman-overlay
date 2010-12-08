@@ -1,10 +1,8 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/xpsb-glx/xpsb-glx-0.18_p4.ebuild,v 1.1 2009/09/13 20:09:12 patrick Exp $
+# $Header: http://www.freifalt.com - lukas.elsner@freifalt.com $
 
 EAPI="2"
-
-#inherit autotools
 
 DESCRIPTION="glx for the intel gma500 (poulsbo)"
 HOMEPAGE="https://launchpad.net/~gma500/+archive/ppa/+packages"
@@ -21,20 +19,7 @@ RDEPEND=""
 
 S="${WORKDIR}/${PN}"
 
-#src_prepare() {
-#	eautoreconf
-#}
-#src_configure() {
-#	econf
-#}
-
-#src_compile() {
-#	emake
-#}
-
 src_install() {
-
-#	emake install DESTDIR="${D}" || die "Make failed"
 
 	insopts -m0755
 

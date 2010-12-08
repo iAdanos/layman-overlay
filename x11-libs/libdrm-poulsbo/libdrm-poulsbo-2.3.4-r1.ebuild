@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libdrm-poulsbo/libdrm-poulsbo-2.3.0_p9-r1.ebuild,v 1.1 2009/09/28 22:43:13 zmedico Exp $
+# $Header: http://www.freifalt.com - lukas.elsner@freifalt.com $
 
 EAPI="2"
 
@@ -20,20 +20,11 @@ IUSE=""
 DEPEND=""
 RDEPEND=">=x11-libs/libdrm-2.3"
 
-#S=${WORKDIR}/libdrm-2.3.0
 S=${WORKDIR}/libdrm-poulsbo-2.3.4
 
 src_unpack() {
 	unpack ${A}
 }
-
-#src_prepare() {
-#	epatch "${WORKDIR}/${PN}_configure_debian.patch"
-#	epatch "${WORKDIR}/${PN}_headers_debian.patch"
-#	epatch "${WORKDIR}/${PN}-relocate_headers.patch"
-
-#	mv "${WORKDIR}/*.h" "${S}/shared-core"
-#}
 
 src_configure() {
 	econf --libdir=/usr/lib/psb -includedir=/usr/include/psb

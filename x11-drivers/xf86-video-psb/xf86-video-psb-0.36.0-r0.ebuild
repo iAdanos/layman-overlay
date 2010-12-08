@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-video-psb/xf86-video-psb-0.32.0_p1.ebuild,v 1.1 2009/12/14 07:08:43 zmedico Exp $
+# $Header: http://www.freifalt.com - lukas.elsner@freifalt.com $
 
 EAPI="2"
 
@@ -47,7 +47,6 @@ src_prepare() {
 }
 
 src_configure() {
-	#ssuominen gave me the hint for doing this way! :)
 	append-flags -fvisibility=default
 	econf
 }
@@ -58,10 +57,4 @@ src_compile() {
 
 src_install() {
 	emake install DESTDIR="${D}" || die "Make failed"
-
-	elog "If your X refuses to start, saying something like"
-	elog "could not mmap framebuffer..."
-	elog "try to pretend to have less ram than you have"
-	elog "by appending a kernel parameter mem=xxxxMB"
-	elog "(especially on a Vaio P11 try mem=2039MB)"
 }

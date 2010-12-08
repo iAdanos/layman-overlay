@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/psb-kmod/psb-kmod-4.41.1_p10-r1.ebuild,v 1.2 2009/12/17 22:40:45 zmedico Exp $
+# $Header: http://www.freifalt.com - lukas.elsner@freifalt.com $
 
 EAPI="2"
 
@@ -47,7 +47,6 @@ src_prepare()
        epatch "${FILESDIR}/02_agp_memory.dpatch"
        epatch "${FILESDIR}/04_drmpsb.dpatch"
        epatch "${FILESDIR}/05_edid-crash.dpatch"
-#       epatch "${FILESDIR}/06_i2c-intelfb.dpatch"
        epatch "${FILESDIR}/08_irqreturn.dpatch"
        epatch "${FILESDIR}/use_udev.dpatch"
        epatch "${FILESDIR}/10_change_prefix.dpatch"
@@ -56,7 +55,6 @@ src_prepare()
        epatch "${FILESDIR}/12_psb-If-not-asking-for-debug-is-an-error-I-want-to-be.dpatch"
        epatch "${FILESDIR}/rt-kernel.dpatch"
        epatch "${FILESDIR}/2.6.36-ioctl.dpatch"
-
 }
 
 
