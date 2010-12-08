@@ -47,12 +47,12 @@ src_prepare() {
 }
 
 src_configure() {
+	#ssuominen gave me the hint for doing this way! :)
+	append-flags -fvisibility=default
 	econf
 }
 
 src_compile() {
-#	replace-flags -fvisibility=hidden -fvisibility=default
-#	filter-flags -fvisibility=hidden -fvisibility=hidden
 	emake
 }
 
