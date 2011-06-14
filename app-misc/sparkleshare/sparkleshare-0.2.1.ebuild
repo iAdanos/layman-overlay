@@ -27,8 +27,7 @@ RDEPEND="${DEPEND}
 	>=dev-vcs/git-1.7
 	net-misc/openssh
 	>=gnome-base/gvfs-1.3
-	dev-util/intltool
-	dev-python/nautilus-python"
+	dev-util/intltool"
 
 S="${WORKDIR}/${MY_P}"
 
