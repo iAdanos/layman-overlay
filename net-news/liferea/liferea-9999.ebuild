@@ -41,6 +41,7 @@ DOCS="AUTHORS ChangeLog README"
 S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
+	./autogen.sh
 	G2CONF="${G2CONF}
 		--enable-sm
 		--disable-schemas-install
