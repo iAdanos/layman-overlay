@@ -6,7 +6,7 @@ EAPI=2
 
 GCONF_DEBUG=no
 
-inherit eutils gnome2 pax-utils
+inherit eutils gnome2 pax-utils git
 
 MY_P=${P/_/-}
 
