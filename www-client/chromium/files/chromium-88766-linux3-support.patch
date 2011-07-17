@@ -1,5 +1,5 @@
---- a/app/resources/app_resources.grd	(revision 88766)
-+++ b/app/resources/app_resources.grd	(working copy)
+--- app/resources/app_resources.grd	(revision 88766)
++++ app/resources/app_resources.grd	(working copy)
 @@ -18,7 +18,7 @@
          <include name="IDR_CLOSE_H" file="close_h.png" type="BINDATA" />
          <include name="IDR_CLOSE_P" file="close_p.png" type="BINDATA" />
@@ -38,8 +38,8 @@
          <include name="IDR_RESTORE_P" file="linux_restore_p.png" type="BINDATA" />
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/python/google/platform_utils.py
 ===================================================================
---- a/tools/python/google/platform_utils.py	(revision 88766)
-+++ b/tools/python/google/platform_utils.py	(working copy)
+--- tools/python/google/platform_utils.py	(revision 88766)
++++ tools/python/google/platform_utils.py	(working copy)
 @@ -20,5 +20,5 @@
    from platform_utils_win import *
  elif sys.platform == 'darwin':
@@ -49,8 +49,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/python/google/platform_
    from platform_utils_linux import *
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/process_coverage.py
 ===================================================================
---- a/tools/code_coverage/process_coverage.py	(revision 88766)
-+++ b/tools/code_coverage/process_coverage.py	(working copy)
+--- tools/code_coverage/process_coverage.py	(revision 88766)
++++ tools/code_coverage/process_coverage.py	(working copy)
 @@ -382,7 +382,7 @@
                      dest='platform',
                      default=None,
@@ -62,8 +62,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/process_c
                      dest='src_dir',
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/coverage_posix.py
 ===================================================================
---- a/tools/code_coverage/coverage_posix.py	(revision 88766)
-+++ b/tools/code_coverage/coverage_posix.py	(working copy)
+--- tools/code_coverage/coverage_posix.py	(revision 88766)
++++ tools/code_coverage/coverage_posix.py	(working copy)
 @@ -547,7 +547,7 @@
      return sys.platform == 'darwin'
  
@@ -75,8 +75,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/coverage_
      """Return True if we are Windows."""
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/coverity/coverity.py
 ===================================================================
---- a/tools/coverity/coverity.py	(revision 88766)
-+++ b/tools/coverity/coverity.py	(working copy)
+--- tools/coverity/coverity.py	(revision 88766)
++++ tools/coverity/coverity.py	(working copy)
 @@ -135,7 +135,7 @@
    print 'Elapsed time: %ds' % (time.time() - start_time)
  
@@ -97,8 +97,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/coverity/coverity.py
      _RunCommand('pwd', options.dry_run, shell=True)
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/heapcheck/chrome_tests.py
 ===================================================================
---- a/tools/heapcheck/chrome_tests.py	(revision 88766)
-+++ b/tools/heapcheck/chrome_tests.py	(working copy)
+--- tools/heapcheck/chrome_tests.py	(revision 88766)
++++ tools/heapcheck/chrome_tests.py	(working copy)
 @@ -457,7 +457,7 @@
  
  
@@ -110,8 +110,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/heapcheck/chrome_tests.
      logging.error("Heap checking works only on Linux at the moment.")
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/grit/grit/node/base.py
 ===================================================================
---- a/tools/grit/grit/node/base.py	(revision 88766)
-+++ b/tools/grit/grit/node/base.py	(working copy)
+--- tools/grit/grit/node/base.py	(revision 88766)
++++ tools/grit/grit/node/base.py	(working copy)
 @@ -463,7 +463,7 @@
      The expression is given a few local variables:
        - 'lang' is the language currently being output
@@ -123,8 +123,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/grit/grit/node/base.py
        - 'pp_if(define)' which behaves just like the C preprocessor's #if, i.e.
 Index: /usr/portage/distfiles/svn-src/chromium/src/tools/swig/swig.py
 ===================================================================
---- a/tools/swig/swig.py	(revision 88766)
-+++ b/tools/swig/swig.py	(working copy)
+--- tools/swig/swig.py	(revision 88766)
++++ tools/swig/swig.py	(working copy)
 @@ -25,6 +25,7 @@
    dir_map = {
        'darwin': 'mac',
@@ -141,10 +141,10 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/tools/swig/swig.py
        'win32':  '-DSWIGWIN',
    }
    swig_bin = os.path.join(swig_dir, dir_map[sys.platform], 'swig')
-Index: /usr/portage/distfiles/svn-src/chromium/src/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py
+Index: /usr/portage/distfiles/svn-src/chromium/src/third_party/mesMesaLisrc/gallium/tests/python/retrace/format.py
 ===================================================================
---- a/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py	(revision 88766)
-+++ b/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py	(working copy)
+--- third_party/mesMesaLisrc/gallium/tests/python/retrace/format.py	(revision 88766)
++++ third_party/mesMesaLisrc/gallium/tests/python/retrace/format.py	(working copy)
 @@ -164,7 +164,7 @@
  
  
@@ -156,8 +156,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/third_party/mesa/MesaLib/src/
          return WindowsConsoleFormatter(stream)
 Index: /usr/portage/distfiles/svn-src/chromium/src/ui/gfx/gfx_resources.grd
 ===================================================================
---- a/ui/gfx/gfx_resources.grd	(revision 88766)
-+++ b/ui/gfx/gfx_resources.grd	(working copy)
+--- ui/gfx/gfx_resources.grd	(revision 88766)
++++ ui/gfx/gfx_resources.grd	(working copy)
 @@ -19,7 +19,7 @@
          <include name="IDR_BLUR_FX" file="resources\blur.fx" type="BINDATA" />
        </if>
@@ -169,8 +169,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/ui/gfx/gfx_resources.grd
          <include name="IDR_LINUX_CHECKBOX_DISABLED_ON" file="resources\linux-checkbox-disabled-on.png" type="BINDATA" />
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/run_webdriver_tests.py
 ===================================================================
---- a/chrome/test/webdriver/run_webdriver_tests.py	(revision 88766)
-+++ b/chrome/test/webdriver/run_webdriver_tests.py	(working copy)
+--- chrome/test/webdriver/run_webdriver_tests.py	(revision 88766)
++++ chrome/test/webdriver/run_webdriver_tests.py	(working copy)
 @@ -32,6 +32,7 @@
      'win32':  'win',
      'darwin': 'mac',
@@ -181,8 +181,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/run_web
  
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/chromedriver_launcher.py
 ===================================================================
---- a/chrome/test/webdriver/chromedriver_launcher.py	(revision 88766)
-+++ b/chrome/test/webdriver/chromedriver_launcher.py	(working copy)
+--- chrome/test/webdriver/chromedriver_launcher.py	(revision 88766)
++++ chrome/test/webdriver/chromedriver_launcher.py	(working copy)
 @@ -66,6 +66,10 @@
                    os.path.join(chrome_src, 'sconsbuild', 'Debug'),
                    os.path.join(chrome_src, 'out', 'Release'),
@@ -194,10 +194,10 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/chromed
        'darwin': [ os.path.join(chrome_src, 'xcodebuild', 'Debug'),
                    os.path.join(chrome_src, 'xcodebuild', 'Release')],
        'win32':  [ os.path.join(chrome_src, 'chrome', 'Debug'),
-Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto_utils.py
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolipyauto_utils.py
 ===================================================================
---- a/chrome/test/pyautolib/pyauto_utils.py	(revision 88766)
-+++ b/chrome/test/pyautolib/pyauto_utils.py	(working copy)
+--- chrome/test/pyautolipyauto_utils.py	(revision 88766)
++++ chrome/test/pyautolipyauto_utils.py	(working copy)
 @@ -133,7 +133,7 @@
      return 'mac'
    if sys.platform == 'win32':
@@ -207,10 +207,10 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto_
      return 'linux'
    raise RuntimeError('Unknown platform')
  
-Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto.py
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolipyauto.py
 ===================================================================
---- a/chrome/test/pyautolib/pyauto.py	(revision 88766)
-+++ b/chrome/test/pyautolib/pyauto.py	(working copy)
+--- chrome/test/pyautolipyauto.py	(revision 88766)
++++ chrome/test/pyautolipyauto.py	(working copy)
 @@ -51,6 +51,10 @@
                    os.path.join(chrome_src, 'sconsbuild', 'Debug'),
                    os.path.join(chrome_src, 'out', 'Release'),
@@ -241,8 +241,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto.
  
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/generated_resources.grd
 ===================================================================
---- a/chrome/app/generated_resources.grd	(revision 88766)
-+++ b/chrome/app/generated_resources.grd	(working copy)
+--- chrome/app/generated_resources.grd	(revision 88766)
++++ chrome/app/generated_resources.grd	(working copy)
 @@ -6,7 +6,7 @@
  
    win32 - Windows
@@ -368,8 +368,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/generated_resource
          Proxy Configuration Help
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/resources/locale_settings.grd
 ===================================================================
---- a/chrome/app/resources/locale_settings.grd	(revision 88766)
-+++ b/chrome/app/resources/locale_settings.grd	(working copy)
+--- chrome/app/resources/locale_settings.grd	(revision 88766)
++++ chrome/app/resources/locale_settings.grd	(working copy)
 @@ -509,7 +509,7 @@
        </message>
  
@@ -381,8 +381,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/resources/locale_s
          </message>
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/resources/options/personal_options.html
 ===================================================================
---- a/chrome/browser/resources/options/personal_options.html	(revision 88766)
-+++ b/chrome/browser/resources/options/personal_options.html	(working copy)
+--- chrome/browser/resources/options/personal_options.html	(revision 88766)
++++ chrome/browser/resources/options/personal_options.html	(working copy)
 @@ -91,7 +91,7 @@
        </div>
      </section>
@@ -394,8 +394,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/resources/opti
        <div>
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/browser_resources.grd
 ===================================================================
---- a/chrome/browser/browser_resources.grd	(revision 88766)
-+++ b/chrome/browser/browser_resources.grd	(working copy)
+--- chrome/browser/browser_resources.grd	(revision 88766)
++++ chrome/browser/browser_resources.grd	(working copy)
 @@ -13,13 +13,13 @@
          <include name="IDR_ABOUT_CONFLICTS_HTML" file="resources\about_conflicts.html" flattenhtml="true" type="BINDATA" />
        </if>
@@ -414,8 +414,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/browser_resour
        <include name="IDR_ABOUT_STATS_HTML" file="resources\about_stats.html" flattenhtml="true" type="BINDATA" />
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/common/extensions/docs/build/build.py
 ===================================================================
---- a/chrome/common/extensions/docs/build/build.py	(revision 88766)
-+++ b/chrome/common/extensions/docs/build/build.py	(working copy)
+--- chrome/common/extensions/docs/build/build.py	(revision 88766)
++++ chrome/common/extensions/docs/build/build.py	(working copy)
 @@ -129,7 +129,7 @@
      search_locations.append(home_dir + "/bin/DumpRenderTree/"
                              "DumpRenderTree.exe")
@@ -427,8 +427,8 @@ Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/common/extensions/docs
      search_locations.append(src_dir + "/sconsbuild/Debug/DumpRenderTree")
 Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/tools/process_dumps_linux.py
 ===================================================================
---- a/chrome/tools/process_dumps_linux.py	(revision 88766)
-+++ b/chrome/tools/process_dumps_linux.py	(working copy)
+--- chrome/tools/process_dumps_linux.py	(revision 88766)
++++ chrome/tools/process_dumps_linux.py	(working copy)
 @@ -292,7 +292,7 @@
  
    (options, args) = parser.parse_args()
