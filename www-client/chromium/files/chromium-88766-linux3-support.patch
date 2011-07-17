@@ -1,0 +1,442 @@
+Index: /usr/portage/distfiles/svn-src/chromium/src/app/resources/app_resources.grd
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/app/resources/app_resources.grd	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/app/resources/app_resources.grd	(working copy)
+@@ -18,7 +18,7 @@
+         <include name="IDR_CLOSE_H" file="close_h.png" type="BINDATA" />
+         <include name="IDR_CLOSE_P" file="close_p.png" type="BINDATA" />
+       </if>
+-      <if expr="not pp_ifdef('toolkit_views') and (os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('toolkit_views') and (os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <include name="IDR_CLOSE" file="linux_close.png" type="BINDATA" />
+         <include name="IDR_CLOSE_H" file="linux_close_h.png" type="BINDATA" />
+         <include name="IDR_CLOSE_P" file="linux_close_p.png" type="BINDATA" />
+@@ -42,7 +42,7 @@
+         <include name="IDR_MAXIMIZE_H" file="maximize_h.png" type="BINDATA" />
+         <include name="IDR_MAXIMIZE_P" file="maximize_p.png" type="BINDATA" />
+       </if>
+-      <if expr="not pp_ifdef('toolkit_views') and (os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('toolkit_views') and (os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <include name="IDR_MAXIMIZE" file="linux_maximize.png" type="BINDATA" />
+         <include name="IDR_MAXIMIZE_H" file="linux_maximize_h.png" type="BINDATA" />
+         <include name="IDR_MAXIMIZE_P" file="linux_maximize_p.png" type="BINDATA" />
+@@ -54,7 +54,7 @@
+         <include name="IDR_MINIMIZE_H" file="minimize_h.png" type="BINDATA" />
+         <include name="IDR_MINIMIZE_P" file="minimize_p.png" type="BINDATA" />
+       </if>
+-      <if expr="not pp_ifdef('toolkit_views') and (os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('toolkit_views') and (os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <include name="IDR_MINIMIZE" file="linux_minimize.png" type="BINDATA" />
+         <include name="IDR_MINIMIZE_H" file="linux_minimize_h.png" type="BINDATA" />
+         <include name="IDR_MINIMIZE_P" file="linux_minimize_p.png" type="BINDATA" />
+@@ -64,7 +64,7 @@
+         <include name="IDR_RESTORE_H" file="restore_h.png" type="BINDATA" />
+         <include name="IDR_RESTORE_P" file="restore_p.png" type="BINDATA" />
+       </if>
+-      <if expr="not pp_ifdef('toolkit_views') and (os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('toolkit_views') and (os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <include name="IDR_RESTORE" file="linux_restore.png" type="BINDATA" />
+         <include name="IDR_RESTORE_H" file="linux_restore_h.png" type="BINDATA" />
+         <include name="IDR_RESTORE_P" file="linux_restore_p.png" type="BINDATA" />
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/python/google/platform_utils.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/python/google/platform_utils.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/python/google/platform_utils.py	(working copy)
+@@ -20,5 +20,5 @@
+   from platform_utils_win import *
+ elif sys.platform == 'darwin':
+   from platform_utils_mac import *
+-elif sys.platform == 'linux2':
++elif sys.platform.startswith('linux'):
+   from platform_utils_linux import *
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/process_coverage.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/process_coverage.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/process_coverage.py	(working copy)
+@@ -382,7 +382,7 @@
+                     dest='platform',
+                     default=None,
+                     help=('Platform that the locv file was generated on. Must'
+-                          'be one of {win32, linux2, macosx}'))
++                          'be one of {win32, linux2, linux3, macosx}'))
+   parser.add_option('-s',
+                     '--source',
+                     dest='src_dir',
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/coverage_posix.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/coverage_posix.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/code_coverage/coverage_posix.py	(working copy)
+@@ -547,7 +547,7 @@
+     return sys.platform == 'darwin'
+ 
+   def IsLinux(self):
+-    return sys.platform == 'linux2'
++    return sys.platform.startswith('linux')
+ 
+   def IsWindows(self):
+     """Return True if we are Windows."""
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/coverity/coverity.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/coverity/coverity.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/coverity/coverity.py	(working copy)
+@@ -135,7 +135,7 @@
+   print 'Elapsed time: %ds' % (time.time() - start_time)
+ 
+   # Do a clean build.  Remove the build output directory first.
+-  if sys.platform == 'linux2':
++  if sys.platform.startswith('linux'):
+     rm_path = os.path.join(options.source_dir,'src','out',options.target)
+   elif sys.platform == 'win32':
+     rm_path = os.path.join(options.source_dir,options.solution_dir,
+@@ -165,7 +165,7 @@
+   print 'Elapsed time: %ds' % (time.time() - start_time)
+ 
+   use_shell_during_make = False
+-  if sys.platform == 'linux2':
++  if sys.platform.startswith('linux'):
+     use_shell_during_make = True
+     os.chdir('src')
+     _RunCommand('pwd', options.dry_run, shell=True)
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/heapcheck/chrome_tests.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/heapcheck/chrome_tests.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/heapcheck/chrome_tests.py	(working copy)
+@@ -457,7 +457,7 @@
+ 
+ 
+ if __name__ == "__main__":
+-  if sys.platform == 'linux2':
++  if sys.platform.startswith('linux'):
+     ret = _main(sys.argv)
+   else:
+     logging.error("Heap checking works only on Linux at the moment.")
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/grit/grit/node/base.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/grit/grit/node/base.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/grit/grit/node/base.py	(working copy)
+@@ -463,7 +463,7 @@
+     The expression is given a few local variables:
+       - 'lang' is the language currently being output
+       - 'defs' is a map of C preprocessor-style define names to their values
+-      - 'os' is the current platform (likely 'linux2', 'win32' or 'darwin').
++      - 'os' is the current platform (likely 'linux2', 'linux3', 'win32' or 'darwin').
+       - 'pp_ifdef(define)' which behaves just like the C preprocessors #ifdef,
+         i.e. it is shorthand for "define in defs"
+       - 'pp_if(define)' which behaves just like the C preprocessor's #if, i.e.
+Index: /usr/portage/distfiles/svn-src/chromium/src/tools/swig/swig.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/tools/swig/swig.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/tools/swig/swig.py	(working copy)
+@@ -25,6 +25,7 @@
+   dir_map = {
+       'darwin': 'mac',
+       'linux2': 'linux',
++      'linux3': 'linux',
+       'win32':  'win',
+   }
+   # Swig documentation lies that platform macros are provided to swig
+@@ -32,6 +33,7 @@
+   platform_flags = {
+       'darwin': '-DSWIGMAC',
+       'linux2': '-DSWIGLINUX',
++      'linux3': '-DSWIGLINUX',
+       'win32':  '-DSWIGWIN',
+   }
+   swig_bin = os.path.join(swig_dir, dir_map[sys.platform], 'swig')
+Index: /usr/portage/distfiles/svn-src/chromium/src/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/third_party/mesa/MesaLib/src/gallium/tests/python/retrace/format.py	(working copy)
+@@ -164,7 +164,7 @@
+ 
+ 
+ def DefaultFormatter(stream):
+-    if sys.platform in ('linux2', 'cygwin'):
++    if sys.platform.startswith('linux') or sys.platform == 'cygwin':
+         return AnsiFormatter(stream)
+     elif sys.platform in ('win32',):
+         return WindowsConsoleFormatter(stream)
+Index: /usr/portage/distfiles/svn-src/chromium/src/ui/gfx/gfx_resources.grd
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/ui/gfx/gfx_resources.grd	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/ui/gfx/gfx_resources.grd	(working copy)
+@@ -19,7 +19,7 @@
+         <include name="IDR_BLUR_FX" file="resources\blur.fx" type="BINDATA" />
+       </if>
+ 
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <include name="IDR_LINUX_CHECKBOX_DISABLED_INDETERMINATE" file="resources\linux-checkbox-disabled-indeterminate.png" type="BINDATA" />
+         <include name="IDR_LINUX_CHECKBOX_DISABLED_OFF" file="resources\linux-checkbox-disabled-off.png" type="BINDATA" />
+         <include name="IDR_LINUX_CHECKBOX_DISABLED_ON" file="resources\linux-checkbox-disabled-on.png" type="BINDATA" />
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/run_webdriver_tests.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/run_webdriver_tests.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/run_webdriver_tests.py	(working copy)
+@@ -32,6 +32,7 @@
+     'win32':  'win',
+     'darwin': 'mac',
+     'linux2': 'linux',
++    'linux3': 'linux',
+   }
+   TEST_PREFIX = 'selenium.test.selenium.webdriver.common.'
+ 
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/chromedriver_launcher.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/chromedriver_launcher.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/test/webdriver/chromedriver_launcher.py	(working copy)
+@@ -66,6 +66,10 @@
+                   os.path.join(chrome_src, 'sconsbuild', 'Debug'),
+                   os.path.join(chrome_src, 'out', 'Release'),
+                   os.path.join(chrome_src, 'sconsbuild', 'Release')],
++      'linux3': [ os.path.join(chrome_src, 'out', 'Debug'),
++                  os.path.join(chrome_src, 'sconsbuild', 'Debug'),
++                  os.path.join(chrome_src, 'out', 'Release'),
++                  os.path.join(chrome_src, 'sconsbuild', 'Release')],
+       'darwin': [ os.path.join(chrome_src, 'xcodebuild', 'Debug'),
+                   os.path.join(chrome_src, 'xcodebuild', 'Release')],
+       'win32':  [ os.path.join(chrome_src, 'chrome', 'Debug'),
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto_utils.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto_utils.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto_utils.py	(working copy)
+@@ -133,7 +133,7 @@
+     return 'mac'
+   if sys.platform == 'win32':
+     return 'win'
+-  if sys.platform == 'linux2':
++  if sys.platform.startswith('linux'):
+     return 'linux'
+   raise RuntimeError('Unknown platform')
+ 
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/test/pyautolib/pyauto.py	(working copy)
+@@ -51,6 +51,10 @@
+                   os.path.join(chrome_src, 'sconsbuild', 'Debug'),
+                   os.path.join(chrome_src, 'out', 'Release'),
+                   os.path.join(chrome_src, 'sconsbuild', 'Release')],
++      'linux3': [ os.path.join(chrome_src, 'out', 'Debug'),
++                  os.path.join(chrome_src, 'sconsbuild', 'Debug'),
++                  os.path.join(chrome_src, 'out', 'Release'),
++                  os.path.join(chrome_src, 'sconsbuild', 'Release')],
+       'darwin': [ os.path.join(chrome_src, 'xcodebuild', 'Debug'),
+                   os.path.join(chrome_src, 'xcodebuild', 'Release')],
+       'win32':  [ os.path.join(chrome_src, 'chrome', 'Debug'),
+@@ -411,7 +415,7 @@
+   @staticmethod
+   def IsLinux():
+     """Are we on Linux? ChromeOS is linux too."""
+-    return 'linux2' == sys.platform
++    return sys.platform.startswith('linux')
+ 
+   @staticmethod
+   def IsWin():
+@@ -3416,6 +3420,7 @@
+     'win32':  'win',
+     'darwin': 'mac',
+     'linux2': 'linux',
++    'linux3': 'linux',
+     'chromeos': 'chromeos',
+   }
+ 
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/generated_resources.grd
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/app/generated_resources.grd	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/app/generated_resources.grd	(working copy)
+@@ -6,7 +6,7 @@
+ 
+   win32 - Windows
+   darwin - Mac
+-  linux2 - Linux (both Views and GTK+)
++  linux - Linux (both Views and GTK+)
+ 
+ Other platform defines such as use_titlecase are declared in build/common.gypi.
+ -->
+@@ -1028,7 +1028,7 @@
+           Preferences...
+         </message>
+       </if>
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <message name="IDS_PREFERENCES" desc="The text label of the Preferences menu item.">
+           Preferences
+         </message>
+@@ -2410,12 +2410,12 @@
+       </if>
+ 
+       <!-- "Create application shortcuts" dialog -->
+-      <if expr="not pp_ifdef('use_titlecase') or os != 'linux2'">
++      <if expr="not pp_ifdef('use_titlecase') or not os.startswith('linux')">
+         <message name="IDS_CREATE_SHORTCUTS_TITLE" desc="Title of the dialog to create application shortcuts for current page.">
+           Create application shortcuts
+         </message>
+       </if>
+-      <if expr="pp_ifdef('use_titlecase') and os == 'linux2'">
++      <if expr="pp_ifdef('use_titlecase') and os.startswith('linux')">
+         <message name="IDS_CREATE_SHORTCUTS_TITLE" desc="In Title Case: title of the dialog to create application shortcuts for current page.">
+           Create Application Shortcuts
+         </message>
+@@ -2435,7 +2435,7 @@
+       <message name="IDS_CREATE_SHORTCUTS_QUICK_LAUNCH_BAR_CHKBOX" desc="Label of the checkbox to create an application shortcut in quick launch bar.">
+         Quick launch bar
+       </message>
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <message name="IDS_CREATE_SHORTCUTS_ERROR_TITLE" desc="Title of the error dialog box when creating an application shortcut failed.">
+           Failed to Create Application Shortcut
+         </message>
+@@ -6204,7 +6204,7 @@
+           and deselect any proxies that have been selected.
+         </message>
+       </if>
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <message name="IDS_ERRORPAGES_SUGGESTION_PROXY_DISABLE_PLATFORM" desc="Linux and ChromeOS instructions for disabling use of a proxy server.">
+           Go to
+           <ph name="BEGIN_BOLD">&lt;strong&gt;</ph>
+@@ -6364,7 +6364,7 @@
+           to test your connection.
+         </message>
+       </if>
+-      <if expr="os != 'darwin' and os != 'linux2' and os.find('bsd') == -1 and os != 'sunos5'">
++      <if expr="os != 'darwin' and not os.startswith('linux') and os.find('bsd') == -1 and os != 'sunos5'">
+         <message name="IDS_ERRORPAGES_SUMMARY_INTERNET_DISCONNECTED_PLATFORM" desc="Summary (platform dependent section) in the error page when the network connection failed.  Describes how to get to the network Diagnostics screen under Windows 7 and later.">
+           Go to
+           <ph name="BEGIN_BOLD">&lt;strong&gt;</ph>
+@@ -7025,7 +7025,7 @@
+           Settings
+         </message>
+       </if>
+-      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <message name="IDS_SETTINGS_TITLE" desc="Title for the settings tab.">
+           Preferences
+         </message>
+@@ -7362,7 +7362,7 @@
+         </message>
+       </if>
+ 
+-      <if expr="os == 'darwin' or os.find('bsd') != -1 or os == 'sunos5' or (os =='linux2' and not pp_ifdef('chromeos'))">
++      <if expr="os == 'darwin' or os.find('bsd') != -1 or os == 'sunos5' or (os.startswith('linux') and not pp_ifdef('chromeos'))">
+         <message name="IDS_AUTOFILL_OPTIONS_TITLE" desc="The title of the Autofill dialog.">
+           Autofill Preferences
+         </message>
+@@ -7579,7 +7579,7 @@
+         </message>
+       </if>
+ 
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <message name="IDS_APPEARANCE_GROUP_NAME" desc="In Title Case: The title of the themes group">
+           Appearance
+         </message>
+@@ -7663,7 +7663,7 @@
+           Some settings have been disabled by your IT administrator.
+         </message>
+       </if>
+-      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <message name="IDS_OPTIONS_MANAGED_PREFS" desc="Mac/Linux banner displayed in case there are managed options the user won't be able to change.">
+           Some preferences have been disabled by your IT administrator.
+         </message>
+@@ -7703,7 +7703,7 @@
+           Search settings
+         </message>
+       </if>
+-      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++      <if expr="not pp_ifdef('chromeos') and (os == 'darwin' or os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+         <message name="IDS_OPTIONS_SEARCH_PLACEHOLDER" desc="Text placeholder for an empty search field on Mac/Linux.">
+           Search preferences
+         </message>
+@@ -9687,7 +9687,7 @@
+       </if> <!-- os == 'darwin' -->
+ 
+       <!-- Linux Global Menubar Menus -->
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <!-- Unity and some other GNOME configurations now have a permanent,
+              Mac-like menu bar that lives outside the window at the top of the
+              screen. The following strings should be in Linux style, not Mac
+@@ -12462,7 +12462,7 @@
+       Import bookmarks now...
+     </message>
+ 
+-    <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++    <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+       <!-- Linux proxy configuration fallback help -->
+       <message name="IDS_ABOUT_LINUX_PROXY_CONFIG_TITLE" desc="Title of HTML page shown on systems where system proxy configuration is unsupported.">
+         Proxy Configuration Help
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/app/resources/locale_settings.grd
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/app/resources/locale_settings.grd	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/app/resources/locale_settings.grd	(working copy)
+@@ -509,7 +509,7 @@
+       </message>
+ 
+       <!-- The width and height for the "create application shortcuts error" dialog. -->
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <message name="IDS_CREATE_SHORTCUTS_ERROR_DIALOG_WIDTH_CHARS" use_name_for_id="true">
+          60
+         </message>
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/resources/options/personal_options.html
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/resources/options/personal_options.html	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/resources/options/personal_options.html	(working copy)
+@@ -91,7 +91,7 @@
+       </div>
+     </section>
+ </if>
+-<if expr="not pp_ifdef('toolkit_views') and (os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5')">
++<if expr="not pp_ifdef('toolkit_views') and (os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5')">
+     <section>
+       <h3 i18n-content="appearance"></h3>
+       <div>
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/browser_resources.grd
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/browser_resources.grd	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/browser/browser_resources.grd	(working copy)
+@@ -13,13 +13,13 @@
+         <include name="IDR_ABOUT_CONFLICTS_HTML" file="resources\about_conflicts.html" flattenhtml="true" type="BINDATA" />
+       </if>
+       <include name="IDR_ABOUT_FLASH_HTML" file="resources\about_flash.html" flattenhtml="true" type="BINDATA" />
+-      <if expr="os == 'linux2' or os.find('bsd') != -1 or os == 'sunos5'">
++      <if expr="os.startswith('linux') or os.find('bsd') != -1 or os == 'sunos5'">
+         <include name="IDR_ABOUT_MEMORY_HTML" file="resources\about_memory_linux.html" flattenhtml="true" type="BINDATA" />
+       </if>
+       <if expr="os == 'darwin'">
+         <include name="IDR_ABOUT_MEMORY_HTML" file="resources\about_memory_mac.html" flattenhtml="true" type="BINDATA" />
+       </if>
+-      <if expr="os != 'linux2' and os != 'darwin' and os.find('bsd') == -1 and os != 'sunos5'">
++      <if expr="not os.startswith('linux') and os != 'darwin' and os.find('bsd') == -1 and os != 'sunos5'">
+         <include name="IDR_ABOUT_MEMORY_HTML" file="resources\about_memory.html" flattenhtml="true" type="BINDATA" />
+       </if>
+       <include name="IDR_ABOUT_STATS_HTML" file="resources\about_stats.html" flattenhtml="true" type="BINDATA" />
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/common/extensions/docs/build/build.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/common/extensions/docs/build/build.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/common/extensions/docs/build/build.py	(working copy)
+@@ -129,7 +129,7 @@
+     search_locations.append(home_dir + "/bin/DumpRenderTree/"
+                             "DumpRenderTree.exe")
+ 
+-  if (sys.platform in ('linux', 'linux2')):
++  if (sys.platform.startswith('linux')):
+     search_locations.append(src_dir + "/sconsbuild/Release/DumpRenderTree")
+     search_locations.append(src_dir + "/out/Release/DumpRenderTree")
+     search_locations.append(src_dir + "/sconsbuild/Debug/DumpRenderTree")
+Index: /usr/portage/distfiles/svn-src/chromium/src/chrome/tools/process_dumps_linux.py
+===================================================================
+--- /usr/portage/distfiles/svn-src/chromium/src/chrome/tools/process_dumps_linux.py	(revision 88766)
++++ /usr/portage/distfiles/svn-src/chromium/src/chrome/tools/process_dumps_linux.py	(working copy)
+@@ -292,7 +292,7 @@
+ 
+   (options, args) = parser.parse_args()
+ 
+-  if sys.platform == 'linux2':
++  if sys.platform.startswith('linux'):
+     sys.exit(main_linux(options, args))
+   else:
+     sys.exit(1)
