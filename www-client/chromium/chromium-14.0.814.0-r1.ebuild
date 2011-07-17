@@ -117,7 +117,6 @@ pkg_setup() {
 src_prepare() {
 	
 	epatch "${FILESDIR}/${PN}-linux-3.0-r0.patch"
-	epatch "${FILESDIR}/${PN}-88766-linux3-support.patch"
 	
 	
 	# Make sure we don't use bundled libvpx headers.
