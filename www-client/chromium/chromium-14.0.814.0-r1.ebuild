@@ -155,11 +155,11 @@ src_prepare() {
 		\! -path 'third_party/tcmalloc/*' \
 		\! -path 'third_party/tlslite/*' \
 		\! -path 'third_party/undoview/*' \
+		\! -path 'third_party/icu/*' \
 		\! -path 'third_party/zlib/contrib/minizip/*' \
 		-delete || die
 
 
-#		\! -path 'third_party/icu/*' \
 
 
 	# Make sure the build system will use the right python, bug #344367.
