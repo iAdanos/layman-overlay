@@ -156,7 +156,7 @@ src_prepare() {
 		\! -path 'third_party/tlslite/*' \
 		\! -path 'third_party/undoview/*' \
 		\! -path 'third_party/zlib/contrib/minizip/*' \
-		\! -path 'third_party/icu/*' \
+#		\! -path 'third_party/icu/*' \
 		-delete || die
 
 	# Make sure the build system will use the right python, bug #344367.
@@ -179,7 +179,7 @@ src_configure() {
 	myconf+="
 		-Duse_system_bzip2=1
 		-Duse_system_flac=1
-		-Duse_system_icu=1
+		-Duse_system_icu=0
 		-Duse_system_libevent=1
 		-Duse_system_libjpeg=1
 		-Duse_system_libpng=1
