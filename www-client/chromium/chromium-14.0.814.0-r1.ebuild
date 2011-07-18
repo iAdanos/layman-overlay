@@ -156,8 +156,11 @@ src_prepare() {
 		\! -path 'third_party/tlslite/*' \
 		\! -path 'third_party/undoview/*' \
 		\! -path 'third_party/zlib/contrib/minizip/*' \
-#		\! -path 'third_party/icu/*' \
 		-delete || die
+
+
+#		\! -path 'third_party/icu/*' \
+
 
 	# Make sure the build system will use the right python, bug #344367.
 	# Only convert directories that need it, to save time.
