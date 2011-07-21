@@ -32,6 +32,7 @@ DEPEND="${RDEPEND}
 	xfs? ( sys-fs/xfsprogs )"
 
 src_prepare() {
+	mv ${BETA_PV} ${P}
 	# until someone that understands their config script build
 	# system gets a patch pushed upstream to make
 	# --enable-srvloc passed to configure also add slpd to the
@@ -43,7 +44,6 @@ src_prepare() {
 }
 
 src_configure() {
-	cd ${BETA_PV}
 	use xfs || eval $(printf 'export ac_cv_header_%s=no\n' {linux,xfs}_{dqblk_xfs,libxfs,xqm,xfs_fs}_h)
 
 	# Ignore --enable-gentoo, we install the init.d by hand and we avoid having
