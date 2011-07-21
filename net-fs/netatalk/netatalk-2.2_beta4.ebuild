@@ -11,7 +11,7 @@ BETA_PV="netatalk-2.2-beta4"
 
 DESCRIPTION="Kernel level implementation of the AppleTalk Protocol Suite"
 HOMEPAGE="http://netatalk.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${BETA_PV}.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${BETA_PV}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"
