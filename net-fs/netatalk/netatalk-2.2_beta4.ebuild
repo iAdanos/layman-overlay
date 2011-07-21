@@ -43,6 +43,7 @@ src_prepare() {
 }
 
 src_configure() {
+	cd ${BETA_PV}
 	use xfs || eval $(printf 'export ac_cv_header_%s=no\n' {linux,xfs}_{dqblk_xfs,libxfs,xqm,xfs_fs}_h)
 
 	# Ignore --enable-gentoo, we install the init.d by hand and we avoid having
