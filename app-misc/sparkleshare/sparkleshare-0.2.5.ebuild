@@ -23,7 +23,8 @@ IUSE=""
 DEPEND=">=dev-lang/mono-2.2
 	>=dev-util/monodevelop-2.0
 	>=dev-dotnet/gtk-sharp-2.12.7
-	>=dev-dotnet/webkit-sharp-0.3"
+	>=dev-dotnet/webkit-sharp-0.3
+	dev-dotnet/notify-sharp"
 RDEPEND="${DEPEND}
 	>=dev-vcs/git-1.7
 	net-misc/openssh
