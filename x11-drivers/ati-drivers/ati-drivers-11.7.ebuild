@@ -290,10 +290,6 @@ src_prepare() {
 		fi
 	fi
 
-	# Experimental 2.6.39 support
-	if kernel_is -ge 2 6 39 ; then
-		epatch "${FILESDIR}"/ati-drivers-2.6.39.patch || die "epatch failed"
-	fi
 
 	# These are the userspace utilities that we also have source for.
 	# We rebuild these later.
