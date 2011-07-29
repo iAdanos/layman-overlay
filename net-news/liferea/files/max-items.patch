@@ -5,7 +5,7 @@
  	if (!g_str_equal (request->source, GOOGLE_READER_BROADCAST_FRIENDS_URL)) { 
  		gchar* source_escaped = g_uri_escape_string(request->source, NULL, TRUE);
 -		gchar* newUrl = g_strdup_printf ("http://www.google.com/reader/atom/feed/%s", source_escaped);
-+		gchar* newUrl = g_strdup_printf ("http://www.google.com/reader/atom/feed/%s?n=200", source_escaped);
++		gchar* newUrl = g_strdup_printf ("http://www.google.com/reader/atom/feed/%s?n=50", source_escaped);
  		update_request_set_source (request, newUrl);
  		g_free (newUrl);
  		g_free (source_escaped);
