@@ -17,7 +17,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus libnotify networkmanager"
+IUSE="dbus libnotify networkmanager maxitems"
 
 RDEPEND=">=x11-libs/gtk+-2.18.0:2
 	>=dev-libs/glib-2.16.0:2
@@ -50,7 +50,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/max-items.patch"
+	if use maxitems; then
+		epatch "${FILESDIR}/max-items.patch"
+	fi
 	./autogen.sh
 	gnome2_src_prepare
 }
