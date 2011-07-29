@@ -49,6 +49,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/max-items-1000.patch"
 	gnome2_src_prepare
 }
 

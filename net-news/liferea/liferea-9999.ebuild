@@ -50,6 +50,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/max-items-1000.patch"
 	./autogen.sh
 	gnome2_src_prepare
 }
