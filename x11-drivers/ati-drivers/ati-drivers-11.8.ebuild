@@ -17,7 +17,6 @@ else
 	SRC_URI="https://launchpad.net/ubuntu/natty/+source/fglrx-installer/2:${PV}-0ubuntu1/+files/fglrx-installer_${PV}.orig.tar.gz"
 	FOLDER_PREFIX=""
 fi
-SRC_URI="http://www.lukius.de/AMD_Catalyst_Preview_driver_OpenGL_4.2_beta_support_8.88.8-x86.x86_64.run"
 IUSE="debug +modules multilib qt4"
 
 LICENSE="AMD GPL-2 QPL-1.0 as-is"
