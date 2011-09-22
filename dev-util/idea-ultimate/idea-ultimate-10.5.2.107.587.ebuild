@@ -28,7 +28,7 @@ src_install() {
 	local dir="/opt/${MY_PN}${MY_PAS}"
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}/bin/${MY_PN}${MY_PAS}.sh"
+	fperms 755 "${dir}/bin/${MY_PN}.sh"
 	local exe=${MY_PN}${MY_PAS}-${SLOT}
 	local icon=${exe}.png
 	newicon "bin/${MY_PN}${MY_PAS}_CE32.png" ${icon}
