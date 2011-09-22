@@ -33,5 +33,5 @@ src_install() {
 	local icon=${exe}.png
 	newicon "bin/${MY_PN}_CE32.png" ${icon}
 	dodir /usr/bin
-	make_wrapper "$exe" "/opt/${P}/bin/${MY_PN}${MY_PAS}.sh"
+	make_wrapper "$exe" "/opt/${P}/bin/${MY_PN}.sh"
 }
