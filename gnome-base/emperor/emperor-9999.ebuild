@@ -21,6 +21,7 @@ IUSE="libnotify"
 
 RDEPEND=">=x11-libs/gtk+-3.0.0
 	>=dev-libs/libxml2-2.6.27:2
+	>=dev-libs/libgee-0.7
 	libnotify? ( >=x11-libs/libnotify-0.7 )"
 DEPEND="${RDEPEND}
 	dev-util/intltool
