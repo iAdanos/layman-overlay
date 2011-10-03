@@ -12,7 +12,7 @@ MY_P=${P/_/-}
 
 DESCRIPTION="Filemanager"
 HOMEPAGE="http://code.jollybox.de/emperor.xhtml"
-EGIT_REPO_URI="https://github.com/tjol/emperor.git"
+EGIT_REPO_URI="git://github.com/tjol/emperor.git"
 SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
