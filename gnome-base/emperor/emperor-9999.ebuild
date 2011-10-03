@@ -30,12 +30,12 @@ DOCS=""
 
 S=${WORKDIR}/${MY_P}
 
-pkg_setup() {
-}
+#pkg_setup() {
+#}
 
 src_prepare() {
 	./bootstrap.sh
 }
 
-src_install() {
-}
+#src_install() {
+#}
