@@ -22,7 +22,7 @@ src_install() {
 	insinto /usr/share/${PN}
 	doins -r ${WORKDIR}/${PN}/* || die
 
-	make_wrapper android-notifier ./run.sh ${PN}
+	make_wrapper android-notifier /usr/share/${PN}/run.sh ${PN}
 
 	doicon ${PN}/icons/${PN}.png || die "doicon failed"
 
