@@ -8,10 +8,10 @@ inherit eutils versionator
 SLOT="$(get_major_version)"
 RDEPEND=">=virtual/jdk-1.6"
 
-MY_PV="$(get_version_component_range 4-5)"
+MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
-MY_PA="community"
-MY_PAS="IC"
+MY_PA="ultimate"
+MY_PAS="IU"
 
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
@@ -24,14 +24,22 @@ IUSE=""
 KEYWORDS="~x86 ~amd64"
 S="${WORKDIR}/${MY_PN}-${MY_PAS}-${MY_PV}"
 
+src_prepare() {
+    epatch "${FILESDIR}"/idea-run.patch
+}
+
 src_install() {
-	local dir="/opt/${MY_PN}${MY_PAS}"
+	local dir="/opt/${MY_PN}${MY_PAS}${SLOT}"
 	insinto "${dir}"
 	doins -r *
 	fperms 755 "${dir}/bin/${MY_PN}.sh"
 	local exe=${MY_PN}${MY_PAS}-${SLOT}
 	local icon=${exe}.png
-	newicon "bin/${MY_PN}_CE32.png" ${icon}
+	newicon "${S}/bin/${MY_PN}32.png" ${icon}
 	dodir /usr/bin
-	make_wrapper "$exe" "/opt/${MY_PN}${MY_PAS}/bin/${MY_PN}.sh"
+	make_wrapper "$exe" "/opt/${MY_PN}${MY_PAS}${SLOT}/bin/${MY_PN}.sh"
+	make_desktop_entry ${exe} "IntelliJ IDEA ${PV} ${MY_PA}" /usr/share/pixmaps/${icon} "Development;IDE"
+	insinto /etc/intellij-idea
+	doins bin/idea.vmoptions || die
+
 }
