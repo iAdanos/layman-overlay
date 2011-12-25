@@ -34,6 +34,8 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 	fperms 755 "${dir}/bin/${MY_PN}.sh"
+	fperms 755 "${dir}/bin/fsnotifier"
+	fperms 755 "${dir}/bin/fsnotifier64"
 	local exe=${MY_PN}${MY_PAS}-${SLOT}
 	local icon=${exe}.png
 	newicon "${S}/bin/${MY_PN}_CE32.png" ${icon}
