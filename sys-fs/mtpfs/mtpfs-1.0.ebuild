@@ -22,9 +22,9 @@ DEPEND="dev-libs/glib:2
 	sys-fs/fuse"
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/${P}.orig
+S=${WORKDIR}/${P}
 
-PATCHES=( "${FILESDIR}"/${P}-overflow.patch )
+#PATCHES=( "${FILESDIR}"/${P}-overflow.patch )
 DOCS=(AUTHORS NEWS README)
 
 src_configure() {
