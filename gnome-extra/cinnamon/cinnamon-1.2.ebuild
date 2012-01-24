@@ -99,7 +99,7 @@ DEPEND="${COMMON_DEPEND}
 	!!=dev-lang/spidermonkey-1.8.2*"
 # libmozjs.so is picked up from /usr/lib while compiling, so block at build-time
 # https://bugs.gentoo.org/show_bug.cgi?id=360413
-S="${WORKDIR}/linuxmint-Cinnamon-dae5da1"
+S="${WORKDIR}/linuxmint-Cinnamon-185383f"
 
 pkg_setup() {
 	DOCS="AUTHORS NEWS README"
@@ -123,11 +123,11 @@ src_unpack() {
 
 src_prepare() {
 	# Fix automagic gnome-bluetooth dep, bug #398145
-	epatch "${FILESDIR}/${PN}-1.1.3-automagic-gnome-bluetooth.patch"
+	#epatch "${FILESDIR}/${PN}-1.1.3-automagic-gnome-bluetooth.patch"
 
 	# Do not depend on libgnome (patch from gnome-shell 3.3.x)
-	epatch "${FILESDIR}/${PN}-1.1.3-extensionjs_path.patch"
-	epatch "${FILESDIR}/${PN}-1.1.3-xdg-open.patch"
+	#epatch "${FILESDIR}/${PN}-1.1.3-extensionjs_path.patch"
+	#epatch "${FILESDIR}/${PN}-1.1.3-xdg-open.patch"
 
 	# Gentoo uses /usr/libexec
 	sed -e "s:/usr/lib/gnome-session/gnome-session-check-accelerated:${EPREFIX}/usr/libexec/gnome-session-check-accelerated:" \
