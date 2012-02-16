@@ -26,7 +26,7 @@ CDEPEND="dev-java/commons-lang:2.1
 	dev-java/jopt-simple:0
 	dev-java/json-simple:0
 	>=dev-java/snakeyaml-1.9:0
-	~games-server/bukkit-1211:0"
+	~games-server/bukkit-1321:0"
 
 DEPEND="${CDEPEND}
 	>=virtual/jdk-1.6"
