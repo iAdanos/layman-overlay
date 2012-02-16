@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="2"
-COMMIT="d31336c"
+COMMIT="52968dc"
 MC_PV="1.1_01"
 MC_PN="minecraft-server-unobfuscated"
 MC_JAR="${MC_PN}-${MC_PV}.jar"
@@ -24,7 +24,6 @@ CDEPEND="dev-java/commons-lang:2.1
 	dev-java/guava:10
 	dev-java/jline:0
 	dev-java/jopt-simple:0
-	dev-java/json-simple:0
 	>=dev-java/snakeyaml-1.9:0
 	~games-server/bukkit-1321:0"
 
@@ -37,8 +36,7 @@ RDEPEND="${CDEPEND}
 
 S="${WORKDIR}/Bukkit-CraftBukkit-${COMMIT}"
 
-JAVA_GENTOO_CLASSPATH="bukkit commons-lang-2.1 ebean guava-10 jline jopt-simple
-snakeyaml json-simple"
+JAVA_GENTOO_CLASSPATH="bukkit commons-lang-2.1 ebean guava-10 jline jopt-simple snakeyaml"
 JAVA_CLASSPATH_EXTRA="${DISTDIR}/${MC_JAR}"
 JAVA_SRC_DIR="src/main/java"
 
