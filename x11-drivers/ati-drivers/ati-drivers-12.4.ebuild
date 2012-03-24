@@ -1,33 +1,24 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-11.6.ebuild,v 1.3 2011/07/13 20:06:39 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-12.2.ebuild,v 1.2 2012/03/21 12:00:51 ago Exp $
 
 EAPI=4
 
 inherit eutils multilib linux-info linux-mod toolchain-funcs versionator
 
-DESCRIPTION="Ati precompiled drivers for r600 (HD Series) and newer chipsets"
-HOMEPAGE="http://www.ati.com"
-# 8.ble will be used for beta releases.
-if [[ $(get_major_version) -gt 8 ]]; then
-	ATI_URL="http://www2.ati.com/drivers/linux/"
-	SRC_URI="${ATI_URL}/ati-driver-installer-${PV/./-}-x86.x86_64.run"
-	FOLDER_PREFIX="common/"
-else
-	SRC_URI="https://launchpad.net/ubuntu/natty/+source/fglrx-installer/2:${PV}-0ubuntu1/+files/fglrx-installer_${PV}.orig.tar.gz"
-	FOLDER_PREFIX=""
-fi
-IUSE="debug +modules multilib qt4"
+DESCRIPTION="Ati precompiled drivers for radeon r600 (HD Series) and newer chipsets"
+HOMEPAGE="http://www.amd.com"
+SRC_URI="http://developer.amd.com/Downloads/OpenCL1.2betadriversLinux.tgz"
+IUSE="debug +modules multilib pax_kernel qt4"
 
 LICENSE="AMD GPL-2 QPL-1.0 as-is"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 SLOT="1"
 
 RDEPEND="
-	<=x11-base/xorg-server-1.10.99
-	!x11-drivers/ati-drivers:0
-	!x11-apps/ati-drivers-extra
+	<=x11-base/xorg-server-1.12
 	>=app-admin/eselect-opengl-1.0.7
+	app-admin/eselect-opencl
 	sys-power/acpid
 	x11-apps/xauth
 	x11-libs/libX11
@@ -35,7 +26,10 @@ RDEPEND="
 	x11-libs/libXinerama
 	x11-libs/libXrandr
 	x11-libs/libXrender
-	multilib? ( app-emulation/emul-linux-x86-opengl )
+	multilib? (
+			app-emulation/emul-linux-x86-opengl
+			app-emulation/emul-linux-x86-xlibs
+	)
 	qt4? (
 			x11-libs/libICE
 			x11-libs/libSM
@@ -48,12 +42,13 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	app-portage/portage-utils
 	x11-proto/inputproto
 	x11-proto/xf86miscproto
 	x11-proto/xf86vidmodeproto
 	x11-proto/xineramaproto
 	x11-libs/libXtst
+	sys-apps/findutils
+	app-misc/pax-utils
 "
 
 EMULTILIB_PKG="true"
@@ -84,7 +79,7 @@ QA_WX_LOAD="
 QA_PRESTRIPPED="
 	usr/lib\(32\|64\)\?/libXvBAW.so.1.0
 	usr/lib\(32\|64\)\?/opengl/ati/lib/libGL.so.1.2
-	usr/lib\(32\|64\)\?/opengl/ati/extensions/fglrx-libglx.so
+	usr/lib\(32\|64\)\?/opengl/ati/extensions/libglx.so
 	usr/lib\(32\|64\)\?/xorg/modules/glesx.so
 	usr/lib\(32\|64\)\?/libAMDXvBA.so.1.0
 	usr/lib\(32\|64\)\?/libaticaldd.so
@@ -96,6 +91,7 @@ QA_SONAME="
 	usr/lib\(32\|64\)\?/libaticalcl.so
 	usr/lib\(32\|64\)\?/libaticaldd.so
 	usr/lib\(32\|64\)\?/libaticalrt.so
+	usr/lib\(32\|64\)\?/libamdocl\(32\|64\)\?.so
 "
 
 QA_DT_HASH="
@@ -103,8 +99,10 @@ QA_DT_HASH="
 	opt/bin/aticonfig
 	opt/bin/atiodcli
 	opt/bin/atiode
+	opt/bin/clinfo
 	opt/bin/fglrxinfo
 	opt/sbin/atieventsd
+	opt/sbin/amdnotifyui
 	usr/lib\(32\|64\)\?/libaticalcl.so
 	usr/lib\(32\|64\)\?/libaticalrt.so
 	usr/lib\(32\|64\)\?/libatiuki.so.1.0
@@ -122,6 +120,8 @@ QA_DT_HASH="
 	usr/lib\(32\|64\)\?/opengl/ati/extensions/fglrx-libglx.so
 	usr/lib\(32\|64\)\?/opengl/ati/lib/fglrx-libGL.so.1.2
 	usr/lib\(32\|64\)\?/opengl/ati/lib/libGL.so.1.2
+	usr/lib\(32\|64\)\?/OpenCL/vendors/amd/libamdocl\(32\|64\)\?.so
+	usr/lib\(32\|64\)\?/OpenCL/vendors/amd/libOpenCL.so.1
 "
 
 _check_kernel_config() {
@@ -257,11 +257,9 @@ pkg_setup() {
 	elog
 	elog "Please note that this driver supports only graphic cards based on"
 	elog "r600 chipset and newer."
-	elog "This represent the ATI Radeon HD series at this moment."
+	elog "This represent the AMD Radeon HD series at this moment."
 	elog
-	elog "If your card is older then usage of ${CATEGORY}/xf86-video-ati"
-	elog "as replacement is highly recommended. Rather than staying with"
-	elog "old versions of this driver."
+	elog "If your card is older then use ${CATEGORY}/xf86-video-ati"
 	elog "For migration informations please reffer to:"
 	elog "http://www.gentoo.org/proj/en/desktop/x/x11/ati-migration-guide.xml"
 	einfo
@@ -290,7 +288,6 @@ src_prepare() {
 		fi
 	fi
 
-
 	# These are the userspace utilities that we also have source for.
 	# We rebuild these later.
 	rm \
@@ -313,7 +310,10 @@ src_prepare() {
 		|| die "Replacing 'finger' with 'who' failed."
 	# Adjust paths in the script from /usr/X11R6/bin/ to /opt/bin/ and
 	# add function to detect default state.
-	epatch "${FILESDIR}"/ati-powermode-opt-path-2.patch || die "Failed to epatch powermode-opt-path-2.patch"
+	epatch "${FILESDIR}"/ati-powermode-opt-path-2.patch
+
+	# fix needed for at least hardened-sources, see bug #392753
+	use pax_kernel && epatch "${FILESDIR}"/ati-drivers-12.2-redefine-WARN.patch
 
 	cd "${MODULE_DIR}"
 
@@ -345,7 +345,6 @@ src_compile() {
 	# These extra libs/utils either have an Imakefile that does not
 	# work very well without tweaking or a Makefile ignoring CFLAGS
 	# and the like. We bypass those.
-
 	# The -DUSE_GLU is needed to compile using nvidia headers
 	# according to a comment in ati-drivers-extra-8.33.6.ebuild.
 	"$(tc-getCC)" -o fgl_glxgears ${CFLAGS} ${LDFLAGS} -DUSE_GLU \
@@ -353,6 +352,8 @@ src_compile() {
 		-lGL -lGLU -lX11 -lm || die "fgl_glxgears build failed"
 	eend $?
 }
+
+src_test() { :; } # no tests present
 
 src_install() {
 	use modules && linux-mod_src_install
@@ -418,6 +419,8 @@ src_install() {
 	# (s)bin.
 	into /opt
 	dosbin "${ARCH_DIR}"/usr/sbin/atieventsd
+	use qt4 && dosbin "${ARCH_DIR}"/usr/sbin/amdnotifyui
+	dobin "${ARCH_DIR}"/usr/bin/clinfo
 	# We cleaned out the compilable stuff in src_unpack
 	dobin "${ARCH_DIR}"/usr/X11R6/bin/*
 
@@ -444,7 +447,7 @@ src_install() {
 		doins -r ${FOLDER_PREFIX}usr/share/ati
 		insinto /usr/share/pixmaps
 		doins ${FOLDER_PREFIX}usr/share/icons/ccc_large.xpm
-		make_desktop_entry amdcccle 'ATI Catalyst Control Center' \
+		make_desktop_entry amdcccle 'AMD Catalyst Control Center' \
 			ccc_large System
 	fi
 
@@ -472,14 +475,10 @@ src_install() {
 	newconfd "${T}"/atieventsd.conf atieventsd
 
 	# PowerXpress stuff
-	local alllibdir="$(get_libdir)"
-	use multilib && alllibdir="lib64 lib32"
-	for libdir in ${alllibdir}
-	do
-		dosym /usr/${libdir}/opengl/xorg-x11/lib/libGL.so.1.2 \
-			/usr/${libdir}/fglrx/libGL.so.1.2
-		dosym ./libGL.so.1.2 /usr/${libdir}/fglrx/fglrx-libGL.so.1.2
-	done
+	exeinto /usr/$(get_libdir)/fglrx
+	doexe "${FILESDIR}"/switchlibGL || die "doexe switchlibGL failed"
+	cp "${FILESDIR}"/switchlibGL "${T}"/switchlibglx
+	doexe "${T}"/switchlibglx || die "doexe switchlibglx failed"
 }
 
 src_install-libs() {
@@ -487,10 +486,12 @@ src_install-libs() {
 		local EX_BASE_DIR="${BASE_DIR}_64a"
 		local pkglibdir=lib64
 		local MY_ARCH_DIR="${S}/arch/x86_64"
+		local oclsuffix=64
 	else
 		local EX_BASE_DIR="${BASE_DIR}"
 		local pkglibdir=lib
 		local MY_ARCH_DIR="${S}/arch/x86"
+		local oclsuffix=32
 	fi
 	einfo "ati tree '${pkglibdir}' -> '$(get_libdir)' on system"
 
@@ -506,17 +507,10 @@ src_install-libs() {
 		libGL.so.${libver}
 	dosym libGL.so.${libver} ${ATI_ROOT}/lib/libGL.so.${libmajor}
 	dosym libGL.so.${libver} ${ATI_ROOT}/lib/libGL.so
-	# PowerXpress stuff
-	dosym /usr/$(get_libdir)/opengl/xorg-x11/lib/libGL.so.1.2 \
-		${ATI_ROOT}/lib/FGL.renamed.libGL.so.1.2
-	dosym ./libGL.so.1.2 ${ATI_ROOT}/lib/fglrx-libGL.so.1.2
 
 	exeinto ${ATI_ROOT}/extensions
 	doexe "${EX_BASE_DIR}"/usr/X11R6/${pkglibdir}/modules/extensions/fglrx/fglrx-libglx.so
-	# PowerXpress stuff
-	dosym /usr/$(get_libdir)/opengl/xorg-x11/extensions/libglx.so \
-		${ATI_ROOT}/extensions/FGL.renamed.libglx.so
-	dosym fglrx-libglx.so ${ATI_ROOT}/extensions/libglx.so
+	mv "${D}"/${ATI_ROOT}/extensions/{fglrx-,}libglx.so
 
 	# other libs
 	exeinto /usr/$(get_libdir)
@@ -531,9 +525,20 @@ src_install-libs() {
 	exeinto /usr/$(get_libdir)/dri
 	doexe "${MY_ARCH_DIR}"/usr/X11R6/${pkglibdir}/modules/dri/fglrx_dri.so
 
-	# AMD Cal libraries
+	# AMD Cal and OpenCL libraries
+	exeinto /usr/$(get_libdir)/OpenCL/vendors/amd
+	doexe "${MY_ARCH_DIR}"/usr/${pkglibdir}/libamdocl*.so*
+	doexe "${MY_ARCH_DIR}"/usr/${pkglibdir}/libOpenCL*.so*
+	dosym libOpenCL.so.${libmajor} /usr/$(get_libdir)/OpenCL/vendors/amd/libOpenCL.so
 	exeinto /usr/$(get_libdir)
 	doexe "${MY_ARCH_DIR}"/usr/${pkglibdir}/libati*.so*
+
+	# OpenCL vendor files
+	insinto /etc/OpenCL/vendors/
+	cat > "${T}"/amdocl${oclsuffix}.icd <<-EOF
+		/usr/$(get_libdir)/OpenCL/vendors/amd/libamdocl${oclsuffix}.so
+	EOF
+	doins "${T}"/amdocl${oclsuffix}.icd
 
 	local envname="${T}"/04ati-dri-path
 	if [[ -n ${ABI} ]]; then
@@ -541,10 +546,19 @@ src_install-libs() {
 	fi
 	echo "LIBGL_DRIVERS_PATH=/usr/$(get_libdir)/dri" > "${envname}"
 	doenvd "${envname}"
+
+	# Silence the QA notice by creating missing soname symlinks
+	for so in $(find "${D}"/usr/$(get_libdir) -maxdepth 1 -name *.so.[0-9].[0-9])
+	do
+		local soname=${so##*/}
+		## let's keep also this alternative way ;)
+		#dosym ${soname} /usr/$(get_libdir)/${soname%.[0-9]}
+		dosym ${soname} /usr/$(get_libdir)/$(scanelf -qF "#f%S" ${so})
+	done
 }
 
 pkg_postinst() {
-	elog "To switch to ATI OpenGL, run \"eselect opengl set ati\""
+	elog "To switch to AMD OpenGL, run \"eselect opengl set ati\""
 	elog "To change your xorg.conf you can use the bundled \"aticonfig\""
 	elog
 	elog "If you experience unexplained segmentation faults and kernel crashes"
@@ -554,9 +568,14 @@ pkg_postinst() {
 	elog "Fully rebooting the system after an ${PN} update is recommended"
 	elog "Stopping Xorg, reloading fglrx kernel module and restart Xorg"
 	elog "might not work"
+	elog
+	elog "Some cards need acpid running to handle events"
+	elog "Please add it to boot runlevel with rc-update add acpid boot"
+	elog
 
 	use modules && linux-mod_pkg_postinst
 	"${ROOT}"/usr/bin/eselect opengl set --use-old ati
+	"${ROOT}"/usr/bin/eselect opencl set --use-old amd
 }
 
 pkg_preinst() {
