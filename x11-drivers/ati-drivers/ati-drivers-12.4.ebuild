@@ -16,7 +16,7 @@ KEYWORDS="amd64 ~x86"
 SLOT="1"
 
 RDEPEND="
-	<=x11-base/xorg-server-1.12
+	<=x11-base/xorg-server-1.13
 	>=app-admin/eselect-opengl-1.0.7
 	app-admin/eselect-opencl
 	sys-power/acpid
