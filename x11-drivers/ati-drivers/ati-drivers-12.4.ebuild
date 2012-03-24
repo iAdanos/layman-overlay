@@ -8,7 +8,7 @@ inherit eutils multilib linux-info linux-mod toolchain-funcs versionator
 
 DESCRIPTION="Ati precompiled drivers for radeon r600 (HD Series) and newer chipsets"
 HOMEPAGE="http://www.amd.com"
-SRC_URI="http://developer.amd.com/Downloads/OpenCL1.2betadriversLinux.tgz"
+SRC_URI="http://www.mindrunner.de/files/fglrx.12.4.tar.gz"
 IUSE="debug +modules multilib pax_kernel qt4"
 
 LICENSE="AMD GPL-2 QPL-1.0 as-is"
