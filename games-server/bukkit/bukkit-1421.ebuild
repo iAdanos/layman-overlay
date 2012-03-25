@@ -4,7 +4,7 @@
 
 EAPI="2"
 COMMIT="cec8cea"
-BUKKIT_API="1.2.3-R0.2"
+BUKKIT_API="1.2.4-R0.1"
 JAVA_PKG_IUSE="doc source"
 
 inherit games java-pkg-2 java-pkg-simple
