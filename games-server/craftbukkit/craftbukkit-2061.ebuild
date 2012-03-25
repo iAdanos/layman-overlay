@@ -4,7 +4,7 @@
 
 EAPI="2"
 COMMIT="cb50fd6"
-MC_PV="1.2.3"
+MC_PV="1.2.4"
 MC_PN="minecraft-server-unobfuscated"
 MC_JAR="${MC_PN}-${MC_PV}.jar"
 
