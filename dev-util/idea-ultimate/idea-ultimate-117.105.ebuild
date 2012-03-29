@@ -38,7 +38,7 @@ src_install() {
 	fperms 755 "${dir}/bin/fsnotifier64"
 	local exe=${MY_PN}${MY_PAS}-${SLOT}
 	local icon=${exe}.png
-	newicon "${S}/bin/${MY_PN}32.png" ${icon}
+	newicon "${S}/bin/${MY_PN}.png" ${icon}
 	dodir /usr/bin
 	make_wrapper "$exe" "/opt/${MY_PN}${MY_PAS}${SLOT}/bin/${MY_PN}.sh"
 	make_desktop_entry ${exe} "IntelliJ IDEA ${PV} ${MY_PA}" /usr/share/pixmaps/${icon} "Development;IDE"
