@@ -17,7 +17,7 @@ KEYWORDS=""
 IUSE="editor"
 
 RDEPEND="virtual/opengl
-		dev-lang/spidermonkey[threadsafe]
+		dev-lang/spidermonkey
 		media-libs/openal
 		dev-libs/crypto++
 		media-libs/libsdl
