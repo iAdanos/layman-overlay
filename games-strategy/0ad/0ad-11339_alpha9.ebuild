@@ -18,7 +18,7 @@ SRC_URI="http://releases.wildfiregames.com/${MY_P}-unix-build.tar.xz"
 LICENSE="GPL-2 LGPL-2.1 MIT CCPL-Attribution-ShareAlike-3.0 as-is"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+audio +editor fam +nvtt pch test"
+IUSE="+audio +editor fam pch test"
 
 RDEPEND="
 	>=dev-lang/spidermonkey-1.8.5
@@ -37,7 +37,6 @@ RDEPEND="
 		media-libs/openal )
 	editor? ( x11-libs/wxGTK:2.8[X] )
 	fam? ( virtual/fam )
-	nvtt? ( dev-util/nvidia-texture-tools )
 	"
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig
@@ -55,7 +54,7 @@ src_configure() {
 
 	# custom configure script
 	local myconf
-	use nvtt || myconf="--without-nvtt"
+	myconf="--without-nvtt"
 	use fam || myconf="${myconf} --without-fam"
 	use pch || myconf="${myconf} --without-pch"
 	use test || myconf="${myconf} --without-tests"

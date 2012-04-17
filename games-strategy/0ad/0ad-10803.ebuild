@@ -17,7 +17,7 @@ SRC_URI="mirror://sourceforge/zero-ad/${MY_P}-unix-build.tar.xz
 LICENSE="GPL-2 CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="debug editor nvtt pch test"
+IUSE="debug editor pch test"
 
 RDEPEND=">=dev-lang/spidermonkey-1.8.5
 	dev-libs/boost
@@ -34,8 +34,7 @@ RDEPEND=">=dev-lang/spidermonkey-1.8.5
 	virtual/fam
 	virtual/jpeg
 	virtual/opengl
-	editor? ( x11-libs/wxGTK:2.8 )
-	nvtt? ( dev-util/nvidia-texture-tools )"
+	editor? ( x11-libs/wxGTK:2.8 )"
 
 DEPEND="${RDEPEND}
 	app-arch/zip
@@ -61,16 +60,8 @@ src_prepare() {
 src_compile() {
 	UPDATE_ARGS="--with-system-enet --with-system-mozjs185"
 
-#	if ! use pch ; then
-#		UPDATE_ARGS="${UPDATE_ARGS}  --without-pch"
-#	fi
-
 	if ! use editor ; then
 		UPDATE_ARGS="${UPDATE_ARGS} --disable-atlas"
-	fi
-
-	if use nvtt ; then
-		UPDATE_ARGS="${UPDATE_ARGS} --with-system-nvtt"
 	fi
 
 	cd "${S}/build/workspaces"
@@ -109,13 +100,10 @@ src_install() {
 
 	insinto "${dir}"/system
 
-	#we install build-in nvtt
-	if use !nvtt ; then
-		doins "${S}"/binaries/system/libnvcore.so || die "doins failed"
-		doins "${S}"/binaries/system/libnvimage.so || die "doins failed"
-		doins "${S}"/binaries/system/libnvmath.so || die "doins failed"
-		doins "${S}"/binaries/system/libnvtt.so || die "doins failed"
-	fi
+	doins "${S}"/binaries/system/libnvcore.so || die "doins failed"
+	doins "${S}"/binaries/system/libnvimage.so || die "doins failed"
+	doins "${S}"/binaries/system/libnvmath.so || die "doins failed"
+	doins "${S}"/binaries/system/libnvtt.so || die "doins failed"
 
 	if use debug ; then
 #		doins "${S}"/binaries/system/libmozjs185-ps-debug.so.1.0 || die "doins failed"
