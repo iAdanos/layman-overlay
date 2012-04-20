@@ -12,6 +12,7 @@ MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
 MY_PA="community"
 MY_PAS="IC"
+MY_BUILD="117.117"
 
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
@@ -22,7 +23,7 @@ SRC_URI="http://download.jetbrains.com/${MY_PN}/${MY_PN}${MY_PAS}-$(get_version_
 LICENSE="IntelliJ-IDEA"
 IUSE=""
 KEYWORDS="~x86 ~amd64"
-S="${WORKDIR}/${MY_PN}-${MY_PAS}-${MY_PV}"
+S="${WORKDIR}/${MY_PN}-${MY_PAS}-${MY_BUILD}"
 
 src_prepare() {
     epatch "${FILESDIR}"/idea-run.patch
