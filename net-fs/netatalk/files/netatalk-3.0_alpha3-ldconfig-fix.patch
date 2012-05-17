@@ -1,0 +1,34 @@
+From e35ec40756dedfa2bfb7b942474e0272364e952b Mon Sep 17 00:00:00 2001
+From: Lukas Elsner <open@mindrunner.de>
+Date: Fri, 18 May 2012 01:34:13 +0200
+Subject: [PATCH] --
+
+---
+ configure |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index 1b735ff..4413662 100755
+--- a/configure
++++ b/configure
+@@ -16447,7 +16447,7 @@ linux* | k*bsd*-gnu)
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+-  finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
++  #finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=no
+   # This implies no fast_install, which is unacceptable.
+@@ -19081,7 +19081,7 @@ linux* | k*bsd*-gnu)
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+-  finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
++  #finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=no
+   # This implies no fast_install, which is unacceptable.
+-- 
+1.7.8.6
+
