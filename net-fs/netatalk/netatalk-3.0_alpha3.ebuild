@@ -119,10 +119,10 @@ src_install() {
 	# Packages that wants to link to netatalk should then probably change the
 	# includepath then, but right now, nothing uses netatalk.
 	# On a side note, it also solves collisions with freebsd-lib and other libcs
-	mv "${D}"/usr/include/netatalk{,2} || die
-	sed -i \
-		-e 's/include <netatalk/include <netatalk2/g' \
-		"${D}"usr/include/{netatalk2,atalk}/* || die
+	#mv "${D}"/usr/include/netatalk{,2} || die
+	#sed -i \
+	#	-e 's/include <netatalk/include <netatalk2/g' \
+	#	"${D}"usr/include/{netatalk2,atalk}/* || die
 
 	# These are not used at all, as the uams are loaded with their .so
 	# extension.
