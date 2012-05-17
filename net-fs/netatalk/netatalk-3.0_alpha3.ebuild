@@ -1,82 +1,114 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/netatalk/netatalk-2.1.5.ebuild,v 1.1 2011/01/04 20:26:10 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-fs/netatalk/netatalk-2.2.2.ebuild,v 1.1 2012/05/02 17:13:24 jlec Exp $
 
-EAPI="2"
+EAPI="4"
 
-inherit pam
+inherit pam flag-o-matic multilib autotools
 
 
-PV="netatalk-3.0alpha3"
+ALPHA_PV="netatalk-3.0alpha3"
 
-DESCRIPTION="Kernel level implementation of the AppleTalk Protocol Suite"
+RESTRICT="test"
+DESCRIPTION="Open Source AFP server and other AppleTalk-related utilities"
 HOMEPAGE="http://netatalk.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${PV}.tar.bz2"
+SRC_URI="mirror://sourceforge/${PN}/${ALPHA_PV}.tar.bz2"
 
-LICENSE="BSD"
+LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="cracklib cups debug kerberos pam slp ssl tcpd xfs"
+IUSE="acl appletalk avahi cracklib cups debug kerberos ldap pam quota slp ssl static-libs tcpd"
 
 RDEPEND=">=sys-libs/db-4.2.52
+	avahi? ( net-dns/avahi[dbus] )
 	cracklib? ( sys-libs/cracklib )
 	pam? ( virtual/pam )
 	ssl? ( dev-libs/openssl )
 	tcpd? ( sys-apps/tcp-wrappers )
 	slp? ( net-libs/openslp )
-	cups? ( net-print/cups )
 	kerberos? ( virtual/krb5 )
 	>=sys-apps/coreutils-7.1
-	!app-text/yudit"
-DEPEND="${RDEPEND}
-	xfs? ( sys-fs/xfsprogs )"
+	!app-text/yudit
+	dev-libs/libgcrypt
+	appletalk? (
+		cups? ( net-print/cups )
+	)
+	acl? (
+		sys-apps/attr
+		sys-apps/acl
+	)
+	ldap? (
+		net-nds/openldap
+	)
+	"
+DEPEND="${RDEPEND}"
+RDEPEND="sys-apps/openrc"
+
+REQUIRED_USE="ldap? ( acl )"
+
+DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS doc/README.AppleTalk )
 
 src_prepare() {
-	mv ${PV} ${P}
-	# until someone that understands their config script build
-	# system gets a patch pushed upstream to make
-	# --enable-srvloc passed to configure also add slpd to the
-	# use line on the initscript, we'll need to do it this way
-	if use slp ; then
-		sed -i -e '/^[[:space:]]*use\>/s:$: slpd:' \
-			distrib/initscripts/rc.atalk.gentoo.tmpl || die
-	fi
+	mv ${ALPHA_PV} ${P}
+	epatch "${FILESDIR}"/${P}-gentoo.patch
+	eautoreconf
 }
 
 src_configure() {
-	use xfs || eval $(printf 'export ac_cv_header_%s=no\n' {linux,xfs}_{dqblk_xfs,libxfs,xqm,xfs_fs}_h)
+	local myconf=
+
+	if use appletalk; then
+		myconf+=" --enable-ddp --enable-timelord $(use_enable cups)"
+	else
+		myconf+=" --disable-ddp --disable-timelord --disable-cups"
+	fi
+
+	if use acl; then
+		myconf+=" --with-acls $(use_with ldap)"
+	else
+		myconf+=" --without-acls --without-ldap"
+	fi
+
+	append-flags -fno-strict-aliasing
 
 	# Ignore --enable-gentoo, we install the init.d by hand and we avoid having
 	# to sed the Makefiles to not do rc-update.
-	# --enable-shadow: let build system detect shadow.h in toolchain
 	econf \
-		$(use_with pam) \
-		$(use_enable cups) \
+		$(use_enable avahi zeroconf) \
 		$(use_enable debug) \
-		$(use_enable tcpd tcp-wrappers) \
 		$(use_enable kerberos krbV-uam) \
-		--disable-krb4-uam \
+		$(use_enable quota) \
 		$(use_enable slp srvloc) \
-		$(use_with ssl ssl-dir) \
+		$(use_enable static-libs static) \
+		$(use_enable tcpd tcp-wrappers) \
 		$(use_with cracklib) \
-		$(use_with slp srvloc) \
+		$(use_with pam) \
+		$(use_with ssl ssl-dir) \
+		--disable-krb4-uam \
 		--disable-afs \
-#		--enable-fhs \
-		--with-bdb=/usr
-}
-
-src_compile() {
-	emake || die
-
-	# Create the init script manually (it's more messy to --enable-gentoo)
-	emake -C distrib/initscripts rc.atalk.gentoo || die
+		--enable-fhs \
+		--with-bdb=/usr \
+		${myconf}
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die
-	dodoc CONTRIBUTORS NEWS README TODO VERSION
+	default
 
-	newinitd distrib/initscripts/rc.atalk.gentoo atalk || die
+	newinitd "${FILESDIR}"/afpd.init.3 afpd
+	newinitd "${FILESDIR}"/cnid_metad.init.2 cnid_metad
+
+	if use appletalk; then
+		newinitd "${FILESDIR}"/atalkd.init atalkd
+		newinitd "${FILESDIR}"/atalk_service.init.2 timelord
+		newinitd "${FILESDIR}"/atalk_service.init.2 papd
+	fi
+
+	use avahi || sed -i -e '/need avahi-daemon/d' "${D}"/etc/init.d/afpd
+	use slp || sed -i -e '/need slpd/d' "${D}"/etc/init.d/afpd
+
+	use ldap || rm "${D}"/etc/netatalk/afp_ldap.conf
+
+	rm "${D}"/etc/netatalk/netatalk.conf
 
 	# The pamd file isn't what we need, use pamd_mimic_system
 	rm -rf "${D}/etc/pam.d"
@@ -91,4 +123,35 @@ src_install() {
 	sed -i \
 		-e 's/include <netatalk/include <netatalk2/g' \
 		"${D}"usr/include/{netatalk2,atalk}/* || die
+
+	# These are not used at all, as the uams are loaded with their .so
+	# extension.
+	rm "${D}"/usr/$(get_libdir)/netatalk/*.la
+
+	use static-libs || rm "${D}"/usr/$(get_libdir)/*.la
+}
+
+pkg_postinst() {
+	elog "Starting from version 2.2.1-r1 the netatalk init script has been split"
+	elog "into different services depending on what you need to start."
+	elog "This was done to make sure that all services are started and reported"
+	elog "properly."
+	elog ""
+	elog "The new services are:"
+	elog "  cnid_metad"
+	elog "  afpd"
+	if use appletalk; then
+		elog "  atalkd"
+		elog "  timelord"
+		elog "  papd"
+	fi
+	elog ""
+	elog "Dependencies should be resolved automatically depending on settings"
+	elog "but please report issues with this on https://bugs.gentoo.org/ if"
+	elog "you find any."
+	elog ""
+	elog "The old configuration file /etc/netatalk/netatalk.conf is no longer"
+	elog "installed, and will be ignored. The new configuration is supposed"
+	elog "to be done through individual /etc/conf.d files, for everything that"
+	elog "cannot be set already through their respective configuration files."
 }
