@@ -106,9 +106,9 @@ src_install() {
 	use avahi || sed -i -e '/need avahi-daemon/d' "${D}"/etc/init.d/afpd
 	use slp || sed -i -e '/need slpd/d' "${D}"/etc/init.d/afpd
 
-	use ldap || rm "${D}"/etc/netatalk/afp_ldap.conf
+	#use ldap || rm "${D}"/etc/netatalk/afp_ldap.conf
 
-	rm "${D}"/etc/netatalk/netatalk.conf
+	rm "${D}"/etc/netatalk/afp.conf
 
 	# The pamd file isn't what we need, use pamd_mimic_system
 	rm -rf "${D}/etc/pam.d"
