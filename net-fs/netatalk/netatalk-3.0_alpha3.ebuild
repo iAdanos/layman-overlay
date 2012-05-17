@@ -7,7 +7,7 @@ EAPI="2"
 inherit pam
 
 
-PV="netatalk-2.2.0"
+PV="netatalk-3.0alpha3"
 
 DESCRIPTION="Kernel level implementation of the AppleTalk Protocol Suite"
 HOMEPAGE="http://netatalk.sourceforge.net/"
