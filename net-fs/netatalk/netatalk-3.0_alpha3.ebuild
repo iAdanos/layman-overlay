@@ -92,9 +92,9 @@ src_configure() {
 }
 
 src_install() {
+	addwrite /etc/ld.so.cache
 	default
 
-	addwrite /etc/ld.so.cache
 
 	newinitd "${FILESDIR}"/afpd.init.3 afpd
 	newinitd "${FILESDIR}"/cnid_metad.init.2 cnid_metad
