@@ -50,7 +50,7 @@ REQUIRED_USE="ldap? ( acl )"
 DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS doc/README.AppleTalk )
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-gentoo.patch
+	#epatch "${FILESDIR}"/${P}-gentoo.patch
 	eautoreconf
 }
 
