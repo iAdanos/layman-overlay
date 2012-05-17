@@ -94,6 +94,8 @@ src_configure() {
 src_install() {
 	default
 
+	addpredict /etc/ld.so.cache~
+
 	newinitd "${FILESDIR}"/afpd.init.3 afpd
 	newinitd "${FILESDIR}"/cnid_metad.init.2 cnid_metad
 
