@@ -8,6 +8,7 @@ inherit pam flag-o-matic multilib autotools
 
 
 ALPHA_PV="netatalk-3.0alpha3"
+S="${WORKDIR}/${ALPHA_PV}"
 
 RESTRICT="test"
 DESCRIPTION="Open Source AFP server and other AppleTalk-related utilities"
@@ -49,7 +50,6 @@ REQUIRED_USE="ldap? ( acl )"
 DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS doc/README.AppleTalk )
 
 src_prepare() {
-	mv ${ALPHA_PV} ${P}
 	epatch "${FILESDIR}"/${P}-gentoo.patch
 	eautoreconf
 }
