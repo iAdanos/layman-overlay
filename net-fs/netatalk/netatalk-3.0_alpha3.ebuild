@@ -93,6 +93,7 @@ src_configure() {
 
 src_install() {
 	addwrite /etc/ld.so.cache
+	addwrite /var/cache/ldconfig/aux-cache
 	default
 
 
