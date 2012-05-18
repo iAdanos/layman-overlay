@@ -88,6 +88,7 @@ src_configure() {
 		--disable-afs \
 		--enable-fhs \
 		--with-bdb=/usr \
+		--disable-bundled-libevent \
 		${myconf}
 }
 
