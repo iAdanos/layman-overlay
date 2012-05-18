@@ -1,0 +1,24 @@
+From c23e75383ec342de9d458d201ebd193b148c331c Mon Sep 17 00:00:00 2001
+From: Lukas Elsner <open@mindrunner.de>
+Date: Fri, 18 May 2012 02:35:36 +0200
+Subject: [PATCH 2/2] ..
+
+---
+ Makefile.am |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 95acb88..96a91e8 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ # Makefile.am for top level of netatalk package
+ 
+-SUBDIRS = libatalk libevent bin config etc man contrib distrib include doc macros test
++SUBDIRS = libatalk bin config etc man contrib distrib include doc macros test
+ 
+ EXTRA_DIST = CONTRIBUTORS COPYRIGHT COPYING NEWS VERSION services.atalk
+ 
+-- 
+1.7.8.6
+
