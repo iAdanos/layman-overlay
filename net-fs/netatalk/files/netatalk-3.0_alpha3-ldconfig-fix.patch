@@ -1,34 +1,25 @@
-From e35ec40756dedfa2bfb7b942474e0272364e952b Mon Sep 17 00:00:00 2001
+From cf8ad3668817519d312251a6afceb7c36e73e22d Mon Sep 17 00:00:00 2001
 From: Lukas Elsner <open@mindrunner.de>
-Date: Fri, 18 May 2012 01:34:13 +0200
-Subject: [PATCH] --
+Date: Fri, 18 May 2012 01:59:51 +0200
+Subject: [PATCH] ..
 
 ---
- configure |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ Makefile.am |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-diff --git a/configure b/configure
-index 1b735ff..4413662 100755
---- a/configure
-+++ b/configure
-@@ -16447,7 +16447,7 @@ linux* | k*bsd*-gnu)
-   need_version=no
-   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
-   soname_spec='${libname}${release}${shared_ext}$major'
--  finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
-+  #finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
-   shlibpath_var=LD_LIBRARY_PATH
-   shlibpath_overrides_runpath=no
-   # This implies no fast_install, which is unacceptable.
-@@ -19081,7 +19081,7 @@ linux* | k*bsd*-gnu)
-   need_version=no
-   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
-   soname_spec='${libname}${release}${shared_ext}$major'
--  finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
-+  #finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
-   shlibpath_var=LD_LIBRARY_PATH
-   shlibpath_overrides_runpath=no
-   # This implies no fast_install, which is unacceptable.
+diff --git a/Makefile.am b/Makefile.am
+index 5ee6b85..95acb88 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -13,7 +13,5 @@ endif
+ 
+ if RUN_LDCONFIG
+ install-exec-hook:
+-	@printf "Running ldconfig to ensure libraries installed in system library directories are added to the dynamic linker cache ... "
+-	@-@NETA_LDCONFIG@
+-	@printf "done\n"
++	@printf "Not running ldconfig to ensure libraries installed in system library directories are added to the dynamic linker cache, because it sucks!"
+ endif
 -- 
 1.7.8.6
 
