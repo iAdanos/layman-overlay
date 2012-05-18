@@ -31,9 +31,6 @@ RDEPEND=">=sys-libs/db-4.2.52
 	>=sys-apps/coreutils-7.1
 	!app-text/yudit
 	dev-libs/libgcrypt
-	appletalk? (
-		cups? ( net-print/cups )
-	)
 	acl? (
 		sys-apps/attr
 		sys-apps/acl
@@ -71,8 +68,6 @@ src_configure() {
 
 	append-flags -fno-strict-aliasing
 
-	# Ignore --enable-gentoo, we install the init.d by hand and we avoid having
-	# to sed the Makefiles to not do rc-update.
 	econf \
 		$(use_enable avahi zeroconf) \
 		$(use_enable debug) \
@@ -93,66 +88,15 @@ src_configure() {
 
 src_install() {
 	default
-
-
-	newinitd "${FILESDIR}"/afpd.init.3 afpd
-	newinitd "${FILESDIR}"/cnid_metad.init.2 cnid_metad
-
-	if use appletalk; then
-		newinitd "${FILESDIR}"/atalkd.init atalkd
-		newinitd "${FILESDIR}"/atalk_service.init.2 timelord
-		newinitd "${FILESDIR}"/atalk_service.init.2 papd
-	fi
-
-	use avahi || sed -i -e '/need avahi-daemon/d' "${D}"/etc/init.d/afpd
-	use slp || sed -i -e '/need slpd/d' "${D}"/etc/init.d/afpd
-
-	#use ldap || rm "${D}"/etc/netatalk/afp_ldap.conf
-
-	rm "${D}"/etc/netatalk/afp.conf
+	newinitd "${FILESDIR}"/netatalk.init netatalk
 
 	# The pamd file isn't what we need, use pamd_mimic_system
 	rm -rf "${D}/etc/pam.d"
 	pamd_mimic_system netatalk auth account password session
 
-	# Move /usr/include/netatalk to /usr/include/netatalk2 to avoid collisions
-	# with /usr/include/netatalk/at.h provided by glibc (strange, uh?)
-	# Packages that wants to link to netatalk should then probably change the
-	# includepath then, but right now, nothing uses netatalk.
-	# On a side note, it also solves collisions with freebsd-lib and other libcs
-	#mv "${D}"/usr/include/netatalk{,2} || die
-	#sed -i \
-	#	-e 's/include <netatalk/include <netatalk2/g' \
-	#	"${D}"usr/include/{netatalk2,atalk}/* || die
-
-	# These are not used at all, as the uams are loaded with their .so
+		# These are not used at all, as the uams are loaded with their .so
 	# extension.
 	rm "${D}"/usr/$(get_libdir)/netatalk/*.la
 
 	use static-libs || rm "${D}"/usr/$(get_libdir)/*.la
-}
-
-pkg_postinst() {
-	elog "Starting from version 2.2.1-r1 the netatalk init script has been split"
-	elog "into different services depending on what you need to start."
-	elog "This was done to make sure that all services are started and reported"
-	elog "properly."
-	elog ""
-	elog "The new services are:"
-	elog "  cnid_metad"
-	elog "  afpd"
-	if use appletalk; then
-		elog "  atalkd"
-		elog "  timelord"
-		elog "  papd"
-	fi
-	elog ""
-	elog "Dependencies should be resolved automatically depending on settings"
-	elog "but please report issues with this on https://bugs.gentoo.org/ if"
-	elog "you find any."
-	elog ""
-	elog "The old configuration file /etc/netatalk/netatalk.conf is no longer"
-	elog "installed, and will be ignored. The new configuration is supposed"
-	elog "to be done through individual /etc/conf.d files, for everything that"
-	elog "cannot be set already through their respective configuration files."
 }
