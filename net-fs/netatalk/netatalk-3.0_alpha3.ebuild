@@ -51,7 +51,6 @@ DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS doc/README.AppleTalk )
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-ldconfig-fix.patch
-	epatch "${FILESDIR}"/${P}-libevent.patch
 	eautoreconf
 }
 
@@ -89,7 +88,6 @@ src_configure() {
 		--disable-afs \
 		--enable-fhs \
 		--with-bdb=/usr \
-		--disable-bundled-libevent \
 		${myconf}
 }
 
