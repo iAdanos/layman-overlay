@@ -24,7 +24,7 @@ LICENSE="AMD GPL-2 as-is"
 KEYWORDS="~amd64 ~x86"
 SLOT="1"
 
-RDEPEND="<=x11-base/xorg-server-1.11.49[-minimal]
+RDEPEND="<=x11-base/xorg-server-1.13.49[-minimal]
 	!x11-drivers/ati-drivers:0
 	!x11-apps/ati-drivers-extra
 	>=app-admin/eselect-opengl-1.0.7
