@@ -313,6 +313,7 @@ src_install() {
 	touch "${D}/etc/ati/atiapfuser.blb" || die
 	insinto /etc/ati
 	doins "${FOLDER_PREFIX}etc/ati/atiapfxx.blb"
+	cp "${FILESDIR}"/signature "${D}/etc/ati/signature"
 }
 
 src_install-libs() {
