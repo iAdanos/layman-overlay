@@ -7,19 +7,19 @@ SLOT="0"
 ETYPE="sources"
 
 CKV=`date +%F`
-K_SECURITY_UNSUPPORTED="1"
 
 inherit kernel-2 git-2
 detect_version
 
 K_NOUSENAME="yes"
-K_NOSETEXTRAVERSION="yes"
+#K_NOSETEXTRAVERSION="yes"
 K_SECURITY_UNSUPPORTED="1"
 
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
-EGIT_PROJECT="linux"
+EGIT_PROJECT="linux-next"
+EGIT_MASTER="master"
 
-DESCRIPTION="Full sources for the Linux kernel (next tree)"
+DESCRIPTION="The linux-next integration testing tree"
 HOMEPAGE="http://www.kernel.org"
 SRC_URI=""
 
