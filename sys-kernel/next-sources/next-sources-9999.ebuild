@@ -12,7 +12,7 @@ inherit kernel-2 git-2
 detect_version
 
 K_NOUSENAME="yes"
-#K_NOSETEXTRAVERSION="yes"
+K_NOSETEXTRAVERSION="yes"
 K_SECURITY_UNSUPPORTED="1"
 
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
