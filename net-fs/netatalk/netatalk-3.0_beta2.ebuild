@@ -7,13 +7,13 @@ EAPI="4"
 inherit pam flag-o-matic multilib autotools
 
 
-ALPHA_PV="netatalk-3.0alpha3"
-S="${WORKDIR}/${ALPHA_PV}"
+BETA_PV="netatalk-3.0beta2"
+S="${WORKDIR}/${BETA_PV}"
 
 RESTRICT="test"
 DESCRIPTION="Open Source AFP server and other AppleTalk-related utilities"
 HOMEPAGE="http://netatalk.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${ALPHA_PV}.tar.bz2"
+SRC_URI="mirror://sourceforge/${PN}/${BETA_PV}.tar.bz2"
 
 LICENSE="GPL-2 BSD"
 SLOT="0"
