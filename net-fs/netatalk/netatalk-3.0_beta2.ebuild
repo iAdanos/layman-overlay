@@ -87,6 +87,7 @@ src_configure() {
 }
 
 src_install() {
+	touch "${D}/doc/README.AppleTalk"
 	default
 	newinitd "${FILESDIR}"/netatalk.init netatalk
 
