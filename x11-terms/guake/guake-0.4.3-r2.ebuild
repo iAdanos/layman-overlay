@@ -49,6 +49,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/guake-0.4.3-fix-window-height-settings.patch
 	epatch "${FILESDIR}"/guake-0.4.3-slide-from-bottom-or-top.patch
 
+	epatch_user
+	
 	python_convert_shebangs 2 src/{guake,prefs.py}
 
 	# We byte-compile in pkg_postinst()
