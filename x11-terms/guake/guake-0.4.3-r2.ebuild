@@ -46,9 +46,8 @@ src_prepare() {
 	local d=${WORKDIR}/debian/patches
 	EPATCH_SOURCE=${d} epatch $(<"${d}"/series)
 
-
-
-		epatch "${FILESDIR}"/0003-2010-03-25-added-ability-to-slide-from-bottom-or-top.patch
+	epatch "${FILESDIR}"/guake-0.4.3-fix-window-height-settings.patch
+	epatch "${FILESDIR}"/guake-0.4.3-slide-from-bottom-or-top.patch
 
 	python_convert_shebangs 2 src/{guake,prefs.py}
 
