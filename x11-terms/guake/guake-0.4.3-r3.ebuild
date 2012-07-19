@@ -49,6 +49,20 @@ src_prepare() {
 	epatch "${FILESDIR}"/guake-0.4.3-fix-window-height-settings.patch
 	epatch "${FILESDIR}"/guake-0.4.3-slide-from-bottom-or-top.patch
 
+	epatch "${FILESDIR}"/0001-Added-a-checkbox-in-the-preferences-dialog-that-lets.patch
+	epatch "${FILESDIR}"/0001-Added-starting-in-fullscreen-mode-with-a-prefs-check.patch
+	epatch "${FILESDIR}"/0001-Add-monitor-choice-to-UI.patch
+	epatch "${FILESDIR}"/0001-Quick-Google-search-from-context-menu.patch
+	epatch "${FILESDIR}"/0002-Added-start-in-fullscreen-to-the-gconf-schema.patch
+	epatch "${FILESDIR}"/arrow-scroll.patch
+	epatch "${FILESDIR}"/fix_ctrl_global.patch
+	epatch "${FILESDIR}"/fix-font-size-guake.py.patch
+	epatch "${FILESDIR}"/fix-font-size-guake.schemas.patch
+	epatch "${FILESDIR}"/fix-font-size-prefs.py.patch
+	epatch "${FILESDIR}"/guake-230-top-panel.patch
+	epatch "${FILESDIR}"/guake-fix-pref.desktop.patch
+	epatch "${FILESDIR}"/guake.glade.patch
+
 	epatch_user
 	
 	python_convert_shebangs 2 src/{guake,prefs.py}
