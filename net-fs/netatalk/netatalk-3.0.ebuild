@@ -95,7 +95,8 @@ src_install() {
 
 		# These are not used at all, as the uams are loaded with their .so
 	# extension.
-	rm "${D}"/usr/$(get_libdir)/netatalk/*.la
+	#
+	#rm "${D}"/usr/$(get_libdir)/netatalk/*.la
 
 	use static-libs || rm "${D}"/usr/$(get_libdir)/*.la
 }
