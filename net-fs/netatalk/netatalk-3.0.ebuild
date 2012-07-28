@@ -43,7 +43,7 @@ RDEPEND="sys-apps/openrc"
 
 REQUIRED_USE="ldap? ( acl )"
 
-DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS doc/README.AppleTalk )
+DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS )
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-ldconfig-fix.patch
@@ -86,7 +86,6 @@ src_configure() {
 }
 
 src_install() {
-	touch "${D}/doc/README.AppleTalk"
 	default
 	newinitd "${FILESDIR}"/netatalk.init netatalk
 
