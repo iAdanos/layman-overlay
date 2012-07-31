@@ -40,9 +40,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	local d=${WORKDIR}/debian/patches
-	EPATCH_SOURCE=${d} epatch $(<"${d}"/series)
-
 	epatch "${FILESDIR}"/guake-0.4.3-fix-window-height-settings.patch
 	epatch "${FILESDIR}"/guake-0.4.3-slide-from-bottom-or-top.patch
 
