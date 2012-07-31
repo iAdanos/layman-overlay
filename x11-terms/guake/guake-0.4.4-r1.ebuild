@@ -7,15 +7,12 @@ EAPI=4
 GCONF_DEBUG=no
 GNOME2_LA_PUNT=yes
 PYTHON_DEPEND="2:2.7"
-DEB_REV=1
 
-inherit eutils gnome2 python
+inherit gnome2 python
 
 DESCRIPTION="A dropdown terminal made for the GTK+ desktops"
 HOMEPAGE="http://guake.org/"
-DEB_URI="mirror://debian/pool/main/${PN:0:1}/${PN}"
-SRC_URI="${DEB_URI}/${PN}_${PV}.orig.tar.gz
-	${DEB_URI}/${PN}_${PV}-${DEB_REV}.debian.tar.gz"
+SRC_URI="mirror://debian/pool/main/${PN:0:1}/${PN}/${PN}_${PV}.orig.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -28,7 +25,7 @@ RDEPEND="dev-python/dbus-python
 	dev-python/pygtk
 	dev-python/pyxdg
 	gnome-base/gconf
-	>=x11-libs/gtk+-2.10:2
+	x11-libs/gtk+:2
 	x11-libs/libX11
 	x11-libs/vte:0[python]"
 DEPEND="${RDEPEND}
@@ -69,9 +66,6 @@ src_prepare() {
 
 	# We byte-compile in pkg_postinst()
 	>py-compile
-
-	# Validate with desktop-file-utils
-	sed -i -e '/^Encoding/d' data/*.desktop.in || die
 
 	gnome2_src_prepare
 }
