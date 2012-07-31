@@ -44,7 +44,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/guake-0.4.3-slide-from-bottom-or-top.patch
 
 	epatch "${FILESDIR}"/0001-Added-a-checkbox-in-the-preferences-dialog-that-lets.patch
-	epatch "${FILESDIR}"/0001-Added-starting-in-fullscreen-mode-with-a-prefs-check.patch
+#	epatch "${FILESDIR}"/0001-Added-starting-in-fullscreen-mode-with-a-prefs-check.patch
 	epatch "${FILESDIR}"/0001-Add-monitor-choice-to-UI.patch
 	epatch "${FILESDIR}"/0001-Quick-Google-search-from-context-menu.patch
 	epatch "${FILESDIR}"/0002-Added-start-in-fullscreen-to-the-gconf-schema.patch
