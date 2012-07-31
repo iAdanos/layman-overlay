@@ -54,7 +54,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/fix-font-size-guake.schemas.patch
 #	epatch "${FILESDIR}"/fix-font-size-prefs.py.patch
 	epatch "${FILESDIR}"/guake-230-top-panel.patch
-	epatch "${FILESDIR}"/guake-fix-pref.desktop.patch
+#	epatch "${FILESDIR}"/guake-fix-pref.desktop.patch
 	epatch "${FILESDIR}"/guake.glade.patch
 
 	epatch_user
