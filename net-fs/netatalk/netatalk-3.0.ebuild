@@ -17,7 +17,7 @@ SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
 LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="acl avahi cracklib cups debug kerberos ldap pam quota ssl tcpd bundled-libuevent"
+IUSE="acl avahi cracklib cups debug kerberos ldap pam quota ssl tcpd no-bundled-libevent"
 
 RDEPEND=">=sys-libs/db-4.2.52
 	avahi? ( net-dns/avahi[dbus] )
@@ -58,9 +58,7 @@ src_configure() {
 		myconf+=" --without-acls --without-ldap"
 	fi
 
-	if use bundled-libuevent; then
-		myconf+=""
-	else
+	if use no-bundled-libevent; then
 		myconf+="--disable-bundled-libevent"
 	fi
 
