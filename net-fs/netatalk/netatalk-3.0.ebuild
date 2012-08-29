@@ -60,6 +60,7 @@ src_configure() {
 
 	if use no-bundled-libevent; then
 		myconf+=" --disable-bundled-libevent"
+		rm -rf "${S}"libevent/
 	fi
 
 
