@@ -98,7 +98,7 @@ src_install() {
 	#
 	#rm "${D}"/usr/$(get_libdir)/netatalk/*.la
 
-	mv "${D}"/$(get_libdir)/* "${D}"/usr/$(get_libdir)/
+	mv "${D}"/lib/* "${D}"/usr/lib/
 
-	use static-libs || rm "${D}"/usr/$(get_libdir)/*.la
+	use static-libs || rm "${D}"/usr/lib/*.la
 }
