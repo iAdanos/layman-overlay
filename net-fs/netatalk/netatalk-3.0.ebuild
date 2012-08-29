@@ -46,9 +46,9 @@ DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS )
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-ldconfig-fix.patch
-	if use no-bundled-libevent; then
-		rm -rf "${S}"libevent/
-	fi
+#	if use no-bundled-libevent; then
+#		rm -rf "${S}"/libevent/*
+#	fi
 	eautoreconf
 }
 
@@ -62,10 +62,8 @@ src_configure() {
 	fi
 
 	if use no-bundled-libevent; then
-		myconf+=" --disable-bundled-libevent"
-		rm -rf "${S}"libevent/
+		myconf+=" --disable-bundled-libevent=YES"
 	fi
-
 
 	append-flags -fno-strict-aliasing
 
