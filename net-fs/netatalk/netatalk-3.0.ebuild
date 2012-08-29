@@ -60,7 +60,9 @@ src_configure() {
 		myconf+=" --without-acls --without-ldap"
 	fi
 
-	if !use bundled-libuevent; then
+	if use bundled-libuevent; then
+		myconf+=""
+	else
 		myconf+="--disable-bundled-libevent"
 	fi
 
