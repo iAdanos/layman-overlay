@@ -62,7 +62,7 @@ src_configure() {
 	fi
 
 	if use no-bundled-libevent; then
-		myconf+=" --disable-bundled-libevent=YES"
+		myconf+=" --disable-bundled-libevent"
 	fi
 
 	append-flags -fno-strict-aliasing
