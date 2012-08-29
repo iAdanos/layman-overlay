@@ -82,7 +82,6 @@ src_configure() {
 		--disable-afs \
 		--enable-fhs \
 		--with-bdb=/usr \
-		--prefix=/usr/local \
 		${myconf}
 }
 
@@ -98,6 +97,8 @@ src_install() {
 	# extension.
 	#
 	#rm "${D}"/usr/$(get_libdir)/netatalk/*.la
+
+	mv "${D}"/$(get_libdir)/* "${D}"/usr/$(get_libdir)/
 
 	use static-libs || rm "${D}"/usr/$(get_libdir)/*.la
 }
