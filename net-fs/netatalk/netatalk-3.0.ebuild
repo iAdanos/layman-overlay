@@ -17,7 +17,7 @@ SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
 LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="acl avahi cracklib cups debug kerberos ldap pam quota slp ssl static-libs
+IUSE="acl avahi cracklib cups debug kerberos ldap pam quota ssl static-libs
 tcpd bundled-libuevent"
 
 RDEPEND=">=sys-libs/db-4.2.52
@@ -26,7 +26,6 @@ RDEPEND=">=sys-libs/db-4.2.52
 	pam? ( virtual/pam )
 	ssl? ( dev-libs/openssl )
 	tcpd? ( sys-apps/tcp-wrappers )
-	slp? ( net-libs/openslp )
 	kerberos? ( virtual/krb5 )
 	>=sys-apps/coreutils-7.1
 	!app-text/yudit
@@ -74,7 +73,6 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable kerberos krbV-uam) \
 		$(use_enable quota) \
-		$(use_enable slp srvloc) \
 		$(use_enable static-libs static) \
 		$(use_enable tcpd tcp-wrappers) \
 		$(use_with cracklib) \
@@ -84,6 +82,7 @@ src_configure() {
 		--disable-afs \
 		--enable-fhs \
 		--with-bdb=/usr \
+		--prefix=/usr \
 		${myconf}
 }
 
