@@ -17,8 +17,7 @@ SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
 LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="acl avahi cracklib cups debug kerberos ldap pam quota ssl static-libs
-tcpd bundled-libuevent"
+IUSE="acl avahi cracklib cups debug kerberos ldap pam quota ssl tcpd bundled-libuevent"
 
 RDEPEND=">=sys-libs/db-4.2.52
 	avahi? ( net-dns/avahi[dbus] )
@@ -73,7 +72,6 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable kerberos krbV-uam) \
 		$(use_enable quota) \
-		$(use_enable static-libs static) \
 		$(use_enable tcpd tcp-wrappers) \
 		$(use_with cracklib) \
 		$(use_with pam) \
@@ -90,7 +88,7 @@ src_install() {
 	newinitd "${FILESDIR}"/netatalk.init netatalk
 
 	# The pamd file isn't what we need, use pamd_mimic_system
-	rm -rf "${D}/etc/pam.d"
+	rm -rf "${D}etc/pam.d"
 	pamd_mimic_system netatalk auth account password session
 
 		# These are not used at all, as the uams are loaded with their .so
@@ -98,7 +96,5 @@ src_install() {
 	#
 	#rm "${D}"/usr/$(get_libdir)/netatalk/*.la
 
-	mv "${D}"/lib/* "${D}"/usr/lib/
-
-	use static-libs || rm "${D}"/usr/lib/*.la
+	mv "${D}"lib/* "${D}"usr/lib64
 }
