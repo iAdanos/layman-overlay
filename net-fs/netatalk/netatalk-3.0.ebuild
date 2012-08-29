@@ -82,7 +82,7 @@ src_configure() {
 		--disable-afs \
 		--enable-fhs \
 		--with-bdb=/usr \
-		--prefix=/usr/local
+		--prefix=/usr/local \
 		${myconf}
 }
 
