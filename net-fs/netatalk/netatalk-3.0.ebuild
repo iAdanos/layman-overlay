@@ -10,14 +10,15 @@ inherit pam flag-o-matic multilib autotools
 #S="${WORKDIR}/${PV}"
 
 RESTRICT="test"
-DESCRIPTION="Open Source AFP server and other AppleTalk-related utilities"
+DESCRIPTION="Open Source AFP server"
 HOMEPAGE="http://netatalk.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${PV}/${P}.tar.bz2"
 
 LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="acl appletalk avahi cracklib cups debug kerberos ldap pam quota slp ssl static-libs tcpd"
+IUSE="acl avahi cracklib cups debug kerberos ldap pam quota slp ssl static-libs
+tcpd bundled-libuevent"
 
 RDEPEND=">=sys-libs/db-4.2.52
 	avahi? ( net-dns/avahi[dbus] )
@@ -53,17 +54,16 @@ src_prepare() {
 src_configure() {
 	local myconf=
 
-	if use appletalk; then
-		myconf+=" --enable-ddp --enable-timelord $(use_enable cups)"
-	else
-		myconf+=" --disable-ddp --disable-timelord --disable-cups"
-	fi
-
 	if use acl; then
 		myconf+=" --with-acls $(use_with ldap)"
 	else
 		myconf+=" --without-acls --without-ldap"
 	fi
+
+	if !use bundled-libuevent; then
+		myconf+="--disable-bundled-libevent"
+	fi
+
 
 	append-flags -fno-strict-aliasing
 
