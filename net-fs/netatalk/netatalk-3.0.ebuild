@@ -46,6 +46,9 @@ DOCS=( CONTRIBUTORS NEWS VERSION AUTHORS )
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-ldconfig-fix.patch
+	if use no-bundled-libevent; then
+		rm -rf "${S}"libevent/
+	fi
 	eautoreconf
 }
 
