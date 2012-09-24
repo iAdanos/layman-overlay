@@ -95,7 +95,6 @@ RDEPEND="${COMMON_DEPEND}
 
 	dev-python/dbus-python
 	dev-python/gconf-python:2
-	dev-python/imaging
 
 	x11-themes/gnome-icon-theme-symbolic
 
@@ -123,6 +122,7 @@ pkg_setup() {
 		--disable-schemas-compile
 		--disable-jhbuild-wrapper-script
 		$(use_with bluetooth)
+		$(use_enable networkmanager)
 		--with-ca-certificates=${EPREFIX}/etc/ssl/certs/ca-certificates.crt
 		BROWSER_PLUGIN_DIR=${EPREFIX}/usr/$(get_libdir)/nsbrowser/plugins"
 	python_set_active_version 2
