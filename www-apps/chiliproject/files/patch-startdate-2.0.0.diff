@@ -1,0 +1,69 @@
+Index: app/models/mailer.rb
+===================================================================
+--- app/models/mailer.rb	2011-07-02 07:13:36.000000000 +0200
++++ app/models/mailer.rb	2011-07-17 17:19:25.000000000 +0200
+@@ -78,14 +78,14 @@
+     render_multipart('issue_edit', body)
+   end
+ 
+-  def reminder(user, issues, days)
++  def reminder(user, issues, days, start, sort_key)
+     redmine_headers 'Type' => "Issue"
+     set_language_if_valid user.language
+     recipients user.mail
+     subject l(:mail_subject_reminder, :count => issues.size, :days => days)
+     body :issues => issues,
+          :days => days,
+-         :issues_url => url_for(:controller => 'issues', :action => 'index', :set_filter => 1, :assigned_to_id => user.id, :sort => 'due_date:asc')
++         :issues_url => url_for(:controller => 'issues', :action => 'index', :set_filter => 1, :assigned_to_id => user.id, :sort => "#{sort_key}:asc")
+     render_multipart('reminder', body)
+   end
+ 
+@@ -345,18 +345,26 @@
+     tracker = options[:tracker] ? Tracker.find(options[:tracker]) : nil
+     user_ids = options[:users]
+ 
+-    s = ARCondition.new ["#{IssueStatus.table_name}.is_closed = ? AND #{Issue.table_name}.due_date <= ?", false, days.day.from_now.to_date]
++    start = options[:start] || nil
++    if start
++        s = ARCondition.new ["#{IssueStatus.table_name}.is_closed = ? AND #{Issue.table_name}.start_date = ?", false, days.day.from_now.to_date]
++        sort_key = "start_date"
++    else
++        s = ARCondition.new ["#{IssueStatus.table_name}.is_closed = ? AND ((#{Issue.table_name}.due_date IS NULL AND #{Version.table_name}.effective_date <= ?) OR #{Issue.table_name}.due_date <= ?)", false, days.day.from_now.to_date, days.day.from_now.to_date]
++        sort_key = "due_date"
++    end
++
+     s << "#{Issue.table_name}.assigned_to_id IS NOT NULL"
+     s << ["#{Issue.table_name}.assigned_to_id IN (?)", user_ids] if user_ids.present?
+     s << "#{Project.table_name}.status = #{Project::STATUS_ACTIVE}"
+     s << "#{Issue.table_name}.project_id = #{project.id}" if project
+     s << "#{Issue.table_name}.tracker_id = #{tracker.id}" if tracker
+ 
+-    issues_by_assignee = Issue.find(:all, :include => [:status, :assigned_to, :project, :tracker],
++    issues_by_assignee = Issue.find(:all, :include => [:status, :assigned_to, :project, :tracker, :fixed_version],
+                                           :conditions => s.conditions
+                                     ).group_by(&:assigned_to)
+     issues_by_assignee.each do |assignee, issues|
+-      deliver_reminder(assignee, issues, days) if assignee && assignee.active?
++      deliver_reminder(assignee, issues, days, start, sort_key) if assignee && assignee.active?
+     end
+   end
+
+--- lib/tasks/reminder.rake    2010-09-27 00:32:38.000000000 +0200
++++ lib/tasks/reminder.rake    2010-10-14 22:57:11.000000000 +0200
+@@ -22,6 +22,7 @@
+   * days     => number of days to remind about (defaults to 7)
+   * tracker  => id of tracker (defaults to all trackers)
+   * project  => id or identifier of project (defaults to all projects)
++  * start    => remind at for start-date instead of due-date
+   * users    => comma separated list of user ids who should be reminded
+ 
+ Example:
+@@ -34,6 +35,7 @@
+     options[:days] = ENV['days'].to_i if ENV['days']
+     options[:project] = ENV['project'] if ENV['project']
+     options[:tracker] = ENV['tracker'].to_i if ENV['tracker']
++    options[:start] = ENV['start'].to_i if ENV['start']
+     options[:users] = (ENV['users'] || '').split(',').each(&:strip!)
+     
+     Mailer.reminders(options)

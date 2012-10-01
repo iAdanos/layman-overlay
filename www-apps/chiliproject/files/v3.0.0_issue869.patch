@@ -1,0 +1,14 @@
+diff --git a/public/stylesheets/application.css b/public/stylesheets/application.css
+index 7c60817..249ee94 100644
+--- a/public/stylesheets/application.css
++++ b/public/stylesheets/application.css
+@@ -1704,7 +1704,8 @@ form#issue-list {
+ }
+ .title-bar .title-bar-actions .contextual a.icon {
+ 	color:#000000;
+-  margin-right: 0px;
++	margin-right: 0px;
++	float: none; /* fix #689 */ 
+ }
+ .title-bar .update {
+ 	right:0;
