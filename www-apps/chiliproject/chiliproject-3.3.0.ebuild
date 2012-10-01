@@ -1,13 +1,15 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 # github download taken from porticron ebuild
 
 EAPI="4"
-USE_RUBY="ruby18 ruby19"
+USE_RUBY="ruby18"
 RUBY_S=chiliproject-${PN}-*
 inherit eutils confutils depend.apache ruby-ng
 
 DESCRIPTION="ChiliProject is a flexible project management web application
-written using Ruby on Rails framework. It is a fork of Redmine."
+written using Ruby on Rails framework."
 HOMEPAGE="http://www.chiliproject.org/"
 SRC_URI="http://nodeload.github.com/chiliproject/chiliproject/tarball/v${PV} ->
 ${P}.tar.gz"
@@ -25,17 +27,20 @@ ruby_add_rdepend ">=dev-ruby/rake-0.8.7
 	>=dev-ruby/i18n-0.4.2
 	<dev-ruby/i18n-0.5
 	>=dev-ruby/rdoc-2.4.2
-	>=dev-ruby/ruby-liquid-2.3.0
-	<dev-ruby/ruby-liquid-2.4
+	>=dev-ruby/liquid-2.3.0
+	<dev-ruby/liquid-2.4
 	dev-ruby/tzinfo
 	>=dev-ruby/fastercsv-1.5.0
 	>=dev-ruby/builder-2.1.2
 	<dev-ruby/builder-2.2
+	=dev-ruby/activesupport-2.3.14-r1
 	"
+# depend on activesupport-2.3.14-r1 to fix
+# https://www.chiliproject.org/issues/529
 
 ruby_add_rdepend ~dev-ruby/rails-2.3.14:2.3
 #ruby_add_rdepend "dev-ruby/activerecord:2.3[mysql?,postgres?,sqlite3?]"
-ruby_add_rdepend fastcgi dev-ruby/ruby-fcgi
+ruby_add_rdepend fastcgi dev-ruby/fcgi
 ruby_add_rdepend imagemagick dev-ruby/rmagick
 ruby_add_rdepend openid dev-ruby/ruby-openid
 
@@ -59,16 +64,12 @@ pkg_setup() {
 
 all_ruby_prepare() {
 	rm -fr log files/delete.me
-	#installing dev-ruby/ruby-net-ldap doesn't seem to work
-	#rm -fr vendor/plugins/ruby-net-ldap-0.0.4
 	echo "CONFIG_PROTECT=\"${CHILIPROJECT_DIR}/config\"" > "${T}/50${PN}"
 	echo "CONFIG_PROTECT_MASK=\"${CHILIPROJECT_DIR}/config/locales\"" >> "${T}/50${PN}"
 
 	if use startdate; then
 				epatch "${FILESDIR}"/patch-startdate-2.0.0.diff
 	fi
-
-	epatch "${FILESDIR}/Gemfile-3.1.0.patch"
 }
 
 all_ruby_install() {
