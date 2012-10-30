@@ -4,7 +4,7 @@
 
 EAPI=4
 
-ESVN_REPO_URI="http://streamboard.gmc.to/svn/oscam/trunk"
+ESVN_REPO_URI="http://www.streamboard.tv/svn/oscam/trunk"
 
 inherit eutils subversion
 
