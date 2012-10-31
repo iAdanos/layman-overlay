@@ -2,20 +2,20 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
-COMMIT="cec8cea"
-BUKKIT_API="1.2.4-R0.1-SNAPSHOT"
+EAPI=4
+MY_PV="1.4.2-R0.1"
 JAVA_PKG_IUSE="doc source"
 
-inherit games java-pkg-2 java-pkg-simple
+inherit games vcs-snapshot java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Generic API component of the plugin-based server mod for Minecraft"
 HOMEPAGE="http://bukkit.org"
-SRC_URI="https://github.com/Bukkit/Bukkit/tarball/${COMMIT} -> ${P}.tar.gz"
+SRC_URI="https://github.com/Bukkit/Bukkit/tarball/master -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
+RESTRICT="test" # Needs hamcrest-1.2?
 
 CDEPEND="dev-java/commons-lang:2.1
 	dev-java/ebean:0
@@ -24,14 +24,16 @@ CDEPEND="dev-java/commons-lang:2.1
 
 DEPEND="${CDEPEND}
 	>=virtual/jdk-1.6"
+#	test? ( dev-java/hamcrest
+#		dev-java/junit:4 )"
 
 RDEPEND="${CDEPEND}
 	>=dev-java/json-simple-1.1:0
 	>=virtual/jre-1.6"
 
-S="${WORKDIR}/Bukkit-Bukkit-${COMMIT}"
+S="${WORKDIR}/${P}"
 
-JAVA_GENTOO_CLASSPATH="commons-lang-2.1 ebean guava-10 snakeyaml"
+JAVA_GENTOO_CLASSPATH="commons-lang-2.1,ebean,guava-10,snakeyaml"
 JAVA_SRC_DIR="src/main/java"
 
 java_prepare() {
@@ -39,11 +41,23 @@ java_prepare() {
 	rm -v pom.xml || die
 
 	mkdir -p target/classes/META-INF/maven/org.bukkit/bukkit || die
-	echo "version=${BUKKIT_API}" > target/classes/META-INF/maven/org.bukkit/bukkit/pom.properties || die
+	echo "version=${MY_PV}" > target/classes/META-INF/maven/org.bukkit/bukkit/pom.properties || die
 }
 
 src_install() {
 	java-pkg_register-dependency json-simple
 	java-pkg-simple_src_install
-	dodoc README.md || die
+	dodoc README.md
+}
+
+src_test() {
+	cd src/test/java || die
+
+	local CP=".:${S}/${PN}.jar:$(java-pkg_getjars hamcrest,junit-4,${JAVA_GENTOO_CLASSPATH})"
+	local TESTS=$(find * -name "*Test.java")
+	TESTS="${TESTS//.java}"
+	TESTS="${TESTS//\//.}"
+
+	ejavac -cp "${CP}" -d . $(find * -name "*.java")
+	ejunit4 -classpath "${CP}" ${TESTS}
 }
