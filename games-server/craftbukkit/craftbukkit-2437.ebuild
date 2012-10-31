@@ -12,7 +12,7 @@ inherit games vcs-snapshot java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Bukkit implementation for the official Minecraft server"
 HOMEPAGE="http://bukkit.org"
-SRC_URI="https://github.com/Bukkit/CraftBukkit/tarball/${MY_PV} -> ${P}.tar.gz
+SRC_URI="https://github.com/Bukkit/CraftBukkit/tarball/master -> ${P}.tar.gz
 	http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/${MC_PV}/minecraft-server-${MC_PV}.jar -> ${MC_JAR}"
 LICENSE="GPL-3"
 SLOT="0"
