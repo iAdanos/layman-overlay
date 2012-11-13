@@ -130,10 +130,6 @@ src_unpack() {
 
 src_prepare() {
 	# Please add a brief description for every added patch
-        if kernel_is 3 7; then
-                epatch "${FILESDIR}"/uapi-patch.patch
-                epatch "${FILESDIR}"/nvreserved.patch
-        fi
 	if use kernel_linux; then
 		if kernel_is lt 2 6 9 ; then
 			eerror "You must build this against 2.6.9 or higher kernels."
