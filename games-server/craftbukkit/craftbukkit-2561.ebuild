@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=4
-MY_PV="1.4.2-R0.1"
+MY_PV="1.4.6-R0.1"
 MC_PV="${MY_PV%-*}"
 MC_PN="minecraft-server-unobfuscated"
 MC_JAR="${MC_PN}-${MC_PV}.jar"
