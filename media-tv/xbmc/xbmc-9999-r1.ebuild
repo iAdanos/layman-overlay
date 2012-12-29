@@ -89,7 +89,7 @@ COMMON_DEPEND="virtual/glu
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	nfs? ( net-fs/libnfs )
-	webserver? ( net-libs/libmicrohttpd )
+	webserver? ( net-libs/libmicrohttpd[messages] )
 	sftp? ( net-libs/libssh )
 	net-misc/curl
 	samba? ( >=net-fs/samba-3.4.6[smbclient] )
