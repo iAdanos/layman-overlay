@@ -13,7 +13,8 @@ written using Ruby on Rails framework."
 HOMEPAGE="http://www.chiliproject.org/"
 #SRC_URI="http://nodeload.github.com/chiliproject/chiliproject/tarball/v${PV} ->
 #${P}.tar.gz"
-SRC_URI="https://www.chiliproject.org/attachments/download/396/chiliproject-${PV}.tar.gz"
+SRC_URI="https://www.chiliproject.org/attachments/download/396/chiliproject-${PV}.tar.gz
+-> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
