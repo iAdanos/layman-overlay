@@ -1,35 +1,35 @@
 #!/sbin/runscript
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/redmine/files/redmine.initd,v 1.1 2010/02/10 16:40:42 matsuu Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-apps/chiliproject/files/chiliproject.initd,v 1.1 2010/02/10 16:40:42 matsuu Exp $
 
 RAILS_ENV=${RAILS_ENV:-production}
-REDMINE_DIR=${REDMINE_DIR:-/var/lib/redmine}
-REDMINE_ADDRESS=${REDMINE_ADDRESS:-localhost}
-REDMINE_PORT=${REDMINE_PORT:-3000}
-REDMINE_USER=${REDMINE_USER:-redmine}
-REDMINE_GROUP=${REDMINE_GROUP:-redmine}
-REDMINE_PIDFILE="${REDMINE_DIR}/tmp/pids/server.pid"
+CHILIPROJECT_DIR=${CHILIPROJECT_DIR:-/var/lib/chiliproject}
+CHILIPROJECT_ADDRESS=${CHILIPROJECT_ADDRESS:-localhost}
+CHILIPROJECT_PORT=${CHILIPROJECT_PORT:-3000}
+CHILIPROJECT_USER=${CHILIPROJECT_USER:-chiliproject}
+CHILIPROJECT_GROUP=${CHILIPROJECT_GROUP:-chiliproject}
+CHILIPROJECT_PIDFILE="${CHILIPROJECT_DIR}/tmp/pids/server.pid"
 
 depend() {
 	use apache2 git-daemon mysql net postgresql svnserve
 }
 
 start() {
-	ebegin "Starting redmine"
-	cd "${REDMINE_DIR}"
-	start-stop-daemon --start --quiet --chuid ${REDMINE_USER}:${REDMINE_GROUP} \
-		--pidfile "${REDMINE_PIDFILE}" \
-		--exec /usr/bin/ruby "${REDMINE_DIR}"/script/server -- \
+	ebegin "Starting chiliproject"
+	cd "${CHILIPROJECT_DIR}"
+	start-stop-daemon --start --quiet --chuid ${CHILIPROJECT_USER}:${CHILIPROJECT_GROUP} \
+		--pidfile "${CHILIPROJECT_PIDFILE}" \
+		--exec /usr/bin/ruby "${CHILIPROJECT_DIR}"/script/server -- \
 		--daemon --environment=${RAILS_ENV} \
-		--binding=${REDMINE_ADDRESS} --port=${REDMINE_PORT} \
-		${REDMINE_OPTS}
+		--binding=${CHILIPROJECT_ADDRESS} --port=${CHILIPROJECT_PORT} \
+		${CHILIPROJECT_OPTS}
 	eend $?
 }
 
 stop() {
-	ebegin "Stopping redmine"
-	cd "${REDMINE_DIR}"
-	start-stop-daemon --stop --quiet --pidfile "${REDMINE_PIDFILE}"
+	ebegin "Stopping chiliproject"
+	cd "${CHILIPROJECT_DIR}"
+	start-stop-daemon --stop --quiet --pidfile "${CHILIPROJECT_PIDFILE}"
 	eend $?
 }
