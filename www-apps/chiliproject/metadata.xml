@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+	<email>enno+gentoo@groeper-berlin.de</email>
+    <description>I maintain it, because I use it. Feel free to take over.</description>
+</maintainer>
+<longdescription>ChiliProject is a flexible project management web application
+written using Ruby on Rails framework. It is a community fork of Redmine.</longdescription>
+<use>
+	<flag name="darcs">Enable support for <pkg>dev-vcs/darcs</pkg></flag>
+	<flag name="git">Enable support for <pkg>dev-vcs/git</pkg></flag>
+	<flag name="mercurial">Enable support for <pkg>dev-vcs/mercurial</pkg></flag>
+	<flag name="openid">Enable openid support</flag>
+	<flag name="passenger">Enable support for <pkg>www-apache/passenger</pkg></flag>
+	<flag name="startdate">Enable startdate patch (http://www.redmine.org/issues/3035)</flag>
+</use>
+</pkgmetadata>
