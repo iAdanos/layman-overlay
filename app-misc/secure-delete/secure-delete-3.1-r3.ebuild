@@ -46,7 +46,7 @@ src_install() {
 		DOC_DIR="${D}"/usr/share/doc/${PF} \
 		install || die "emake install failed"
 	
-	newbin smem ssmem || die
+	newbin smem sdmem || die
 	rm ${D}/usr/bin/smem || die
 	dodoc secure_delete.doc usenix6-gutmann.doc || die
 }
