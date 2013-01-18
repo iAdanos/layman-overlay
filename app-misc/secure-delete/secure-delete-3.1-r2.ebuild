@@ -41,7 +41,7 @@ src_compile() {
 
 src_install() {
 	newbin smem ssmem || die
-	rm ${D}/bin/smem || die
+	rm ${D}/usr/bin/smem || die
 	emake \
 		INSTALL_DIR="${D}"/usr/bin \
 		MAN_DIR="${D}"/usr/share/man \
