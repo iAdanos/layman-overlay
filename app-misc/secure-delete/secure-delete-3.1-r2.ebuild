@@ -40,14 +40,14 @@ src_compile() {
 }
 
 src_install() {
-	newbin smem ssmem || die
-	rm ${D}/usr/bin/smem || die
 	emake \
 		INSTALL_DIR="${D}"/usr/bin \
 		MAN_DIR="${D}"/usr/share/man \
 		DOC_DIR="${D}"/usr/share/doc/${PF} \
 		install || die "emake install failed"
-
+	
+	newbin smem ssmem || die
+	rm ${D}/usr/bin/smem || die
 	dodoc secure_delete.doc usenix6-gutmann.doc || die
 }
 
