@@ -41,6 +41,7 @@ src_compile() {
 
 src_install() {
 	newbin smem ssmem
+	rm ${D}/bin/smem
 	emake \
 		INSTALL_DIR="${D}"/usr/bin \
 		MAN_DIR="${D}"/usr/share/man \
