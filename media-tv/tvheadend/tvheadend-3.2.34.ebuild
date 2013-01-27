@@ -8,9 +8,9 @@ inherit eutils toolchain-funcs user
 
 DESCRIPTION="A combined DVB receiver, Digital Video Recorder and Live TV streaming server"
 HOMEPAGE="https://www.lonelycoder.com/redmine/projects/tvheadend/"
-CP="tvheadend-3.2patch2"
-#SRC_URI="https://github.com/downloads/${PN}/${PN}/${P}.tar.gz"
-SRC_URI="https://github.com/tvheadend/tvheadend/archive/${CP}.tar.gz"
+CV="3.2patch2"
+CP="tvheadend-${CV}"
+SCR_URI="https://nodeload.github.com/tvheadend/tvheadend/tar.gz/${CV} -> ${CP}.tar.gz"
 S=${WORKDIR}/${CP}
 
 LICENSE="GPL-3"
