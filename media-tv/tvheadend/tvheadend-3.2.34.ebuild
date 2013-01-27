@@ -9,7 +9,6 @@ inherit eutils toolchain-funcs user
 DESCRIPTION="A combined DVB receiver, Digital Video Recorder and Live TV streaming server"
 HOMEPAGE="https://www.lonelycoder.com/redmine/projects/tvheadend/"
 SRC_URI="http://www.mindrunner.de/portage/${PF}.tar.gz"
-S=${WORKDIR}/${CP}
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -31,7 +30,7 @@ pkg_setup() {
 
 src_prepare() {
 	# set the correct version number
-	#sed -e "s:(3.2.18~g40a8920):(${PV}):" -i debian/changelog || die 'sed failed!'
+	sed -e "s:(3.2.18~g40a8920):(${PV}):" -i debian/changelog || die 'sed failed!'
 
 	# remove '-Werror' wrt bug #438424
 	sed -e 's:-Werror::' -i Makefile || die 'sed failed!'
