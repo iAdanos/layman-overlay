@@ -31,7 +31,7 @@ pkg_setup() {
 
 src_prepare() {
 	# set the correct version number
-	sed -e "s:(3.2.18~g40a8920):(${PV}):" -i debian/changelog || die 'sed failed!'
+	#sed -e "s:(3.2.18~g40a8920):(${PV}):" -i debian/changelog || die 'sed failed!'
 
 	# remove '-Werror' wrt bug #438424
 	sed -e 's:-Werror::' -i Makefile || die 'sed failed!'
