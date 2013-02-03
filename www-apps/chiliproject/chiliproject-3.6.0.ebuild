@@ -34,12 +34,12 @@ ruby_add_rdepend ">=dev-ruby/rake-0.8.7
 	>=dev-ruby/fastercsv-1.5.0
 	>=dev-ruby/builder-2.1.2
 	<dev-ruby/builder-2.2
-	=dev-ruby/activesupport-2.3.14-r1
+	=dev-ruby/activesupport-2.3.16
 	"
 # depend on activesupport-2.3.14-r1 to fix
 # https://www.chiliproject.org/issues/529
 
-ruby_add_rdepend ~dev-ruby/rails-2.3.14:2.3
+ruby_add_rdepend ~dev-ruby/rails-2.3.16:2.3
 #ruby_add_rdepend "dev-ruby/activerecord:2.3[mysql?,postgres?,sqlite3?]"
 ruby_add_rdepend fastcgi dev-ruby/fcgi
 ruby_add_rdepend imagemagick dev-ruby/rmagick
