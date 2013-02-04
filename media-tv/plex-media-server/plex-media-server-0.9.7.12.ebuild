@@ -8,11 +8,16 @@ inherit eutils
 
 MAGIC1="407"
 MAGIC2="db37d6d"
+URI="http://plex.r.worldssl.net/PlexMediaServer"
 DESCRIPTION="Plex Media Server is a free media library that is intended for use with a plex client available for OS X, iOS and Android systems. It is a standalone product which can be used in conjunction with every program, that knows the API. For managing the library a web based interface is provided."
 HOMEPAGE="http://www.plexapp.com/"
 KEYWORDS="-* ~x86 ~amd64"
-SRC_URI="x86?	( http://www.plexapp.com/repo/pool/main/p/plexmediaserver/plexmediaserver_${PV}.${MAGIC1}-${MAGIC2}_i386.deb )
-	     amd64?	 (http://www.plexapp.com/repo/pool/main/p/plexmediaserver/plexmediaserver_${PV}.${MAGIC1}-${MAGIC2}_amd64.deb )"
+SRC_URI="x86?	( 
+			${URI}/${PV}.${MAGIC1}-${MAGIC2}/plexmediaserver_${PV}.${MAGIC1}-${MAGIC2}_i386.deb
+		 )
+		 amd64?	(
+		 	${URI}/${PV}.${MAGIC1}-${MAGIC2}/plexmediaserver_${PV}.${MAGIC1}-${MAGIC2}_amd64.deb
+		 )"
 SLOT="0"
 LICENSE="PMS-License"
 IUSE=""
