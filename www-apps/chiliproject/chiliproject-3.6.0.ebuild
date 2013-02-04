@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 # github download taken from porticron ebuild
@@ -35,6 +35,7 @@ ruby_add_rdepend ">=dev-ruby/rake-0.8.7
 	>=dev-ruby/builder-2.1.2
 	<dev-ruby/builder-2.2
 	=dev-ruby/activesupport-2.3.16
+	>=dev-ruby/json-1.7.6
 	"
 # depend on activesupport-2.3.14-r1 to fix
 # https://www.chiliproject.org/issues/529
@@ -51,7 +52,8 @@ RDEPEND="${RDEPEND}
 	darcs? ( dev-vcs/darcs )
 	git? ( dev-vcs/git )
 	mercurial? ( dev-vcs/mercurial )
-	subversion? ( >=dev-vcs/subversion-1.3 )"
+	subversion? ( >=dev-vcs/subversion-1.3 )
+	mysql? ( >=dev-ruby/mysql-ruby-2.9.0 )"
 	#dev-ruby/activerecord:2.3[mysql?,postgres?,sqlite3?]
 
 CHILIPROJECT_DIR="/var/lib/${PN}"
