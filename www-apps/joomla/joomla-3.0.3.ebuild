@@ -6,8 +6,8 @@ EAPI=4
 
 inherit webapp depend.php
 
-MAGIC_1="17710"
-MAGIC_2="77237"
+MAGIC_1="17965"
+MAGIC_2="78414"
 
 DESCRIPTION="Joomla is a powerful Open Source Content Management System."
 HOMEPAGE="http://www.joomla.org/"
