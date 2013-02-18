@@ -1,0 +1,22 @@
+--- Gemfile.orig	2013-02-13 09:35:22.000000000 +0100
++++ Gemfile	2013-02-13 09:35:27.000000000 +0100
+@@ -1,7 +1,7 @@
+ # -*- coding: utf-8 -*-
+ source :rubygems
+ 
+-gem "rails", "2.3.16"
++gem "rails", "2.3.17"
+ 
+ gem "coderay", "~> 1.0.0"
+ gem "i18n", "~> 0.4.2"
+--- config/environment.rb.orig	2013-02-13 09:36:23.000000000 +0100
++++ config/environment.rb	2013-02-13 09:36:41.000000000 +0100
+@@ -22,7 +22,7 @@
+ ENV['RAILS_ENV'] ||= ENV['RACK_ENV'] if ENV['RACK_ENV']
+ 
+ # Specifies gem version of Rails to use when vendor/rails is not present
+-RAILS_GEM_VERSION = '2.3.16' unless defined? RAILS_GEM_VERSION
++RAILS_GEM_VERSION = '2.3.17' unless defined? RAILS_GEM_VERSION
+ 
+ # this is replaced by config.encoding = "utf-8" in rails3
+ if RUBY_VERSION >= '1.9'
