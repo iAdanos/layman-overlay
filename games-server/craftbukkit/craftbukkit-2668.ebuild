@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=4
-MY_PV="1.4.6-R0.1"
+MY_PV="1.5-R0.1"
 MC_PV="${MY_PV%-*}"
 MC_PN="minecraft-server-unobfuscated"
 MC_JAR="${MC_PN}-${MC_PV}.jar"
@@ -28,7 +28,7 @@ CDEPEND="dev-java/commons-lang:2.1
 	dev-java/jline:2
 	dev-java/jopt-simple:0
 	>=dev-java/snakeyaml-1.9:0
-	~games-server/bukkit-1652:0"
+	~games-server/bukkit-1705:0"
 
 DEPEND="${CDEPEND}
 	>=virtual/jdk-1.6"
