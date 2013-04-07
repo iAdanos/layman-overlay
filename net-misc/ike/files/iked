@@ -1,0 +1,17 @@
+#!/sbin/runscript
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting ike daemon"
+	start-stop-daemon --start --exec /usr/sbin/iked
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ike daemon"
+	start-stop-daemon --stop --oknodo --exec /usr/sbin/iked
+	eend $?
+}
