@@ -12,7 +12,7 @@ MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
 MY_PA="ultimate"
 MY_PAS="IU"
-MY_BUILD="123.169"
+MY_BUILD="129.239"
 
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
