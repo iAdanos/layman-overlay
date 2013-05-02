@@ -38,6 +38,7 @@ DEPEND="${RDEPEND}
 	x11-proto/resourceproto"
 
 src_configure() {
+	epatch "${FILESDIR}"/xserver-xorg-video-intel-virtual_crtc.patch
 	XORG_CONFIGURE_OPTIONS=(
 		$(use_enable dri)
 		$(use_enable glamor)
