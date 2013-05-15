@@ -14,7 +14,7 @@ inherit eutils distutils systemd
 
 if [[ "${PV}" == *9999* ]]; then
 	EBZR_REPO_URI="lp:${PN}"
-	EBZR_REVISION="875"
+	#EBZR_REVISION="875"
 	# "Nosmart" is much faster for initial branching.
 	EBZR_INITIAL_URI="nosmart+${EBZR_REPO_URI}"
 	EBZR_WORKDIR_CHECKOUT="t"   #434746
