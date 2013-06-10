@@ -10,9 +10,9 @@ RDEPEND=">=virtual/jdk-1.6"
 
 MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
-MY_PA="community"
-MY_PAS="IC"
-MY_BUILD="129.451"
+MY_PA="ultimate"
+MY_PAS="IU"
+MY_BUILD="129.713"
 
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
