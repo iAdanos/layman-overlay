@@ -41,7 +41,7 @@ src_prepare() {
 }
 
 src_configure() {
-	econf CXX=$(tc-getCXX)
+	econf --disable-dependency-tracking CXX=$(tc-getCXX)
 }
 
 src_compile() {
