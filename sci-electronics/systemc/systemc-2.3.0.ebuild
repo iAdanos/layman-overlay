@@ -29,14 +29,14 @@ src_prepare() {
 	sed -i -e "s:OPT_CXXFLAGS=\"-O3\":OPT_CXXFLAGS=\"${CXXFLAGS}\":g" configure || die "Patching configure failed"
 
 	sed -i -e '/#include "sysc\/utils\/sc_report.h"/a \
-#include <cstdlib> \
-#include <cstring>' src/sysc/utils/sc_utils_ids.cpp  || die "Patching failed"
+		#include <cstdlib> \
+		#include <cstring>' src/sysc/utils/sc_utils_ids.cpp  || die "Patching failed"
 
 	for sfile in src/sysc/qt/md/*.s ; do
 		sed -i -e '$a \
-#if defined(__linux__) && defined(__ELF__) \
-.section .note.GNU-stack,"",%progbits \
-#endif' "${sfile}" || die "Patching ${sfile} failed"
+			#if defined(__linux__) && defined(__ELF__) \
+			.section .note.GNU-stack,"",%progbits \
+			#endif' "${sfile}" || die "Patching ${sfile} failed"
 	done
 }
 
