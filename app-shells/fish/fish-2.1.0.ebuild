@@ -22,7 +22,7 @@ DEPEND="sys-libs/ncurses
 	X? ( x11-misc/xsel )"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}"
 
 src_prepare() {
 	eautoreconf
