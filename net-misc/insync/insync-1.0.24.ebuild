@@ -24,6 +24,8 @@ RDEPEND="${DEPEND}
 IUSE="nautilus dolphin thunar caja"
 
 src_unpack() {
+	elog "If this fails with a deb2targz error, see"
+	elog "https://github.com/mrpdaemon/gentoo-overlay/issues/4"
 	mkdir "${S}"
 	cd "${S}"
 
