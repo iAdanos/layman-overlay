@@ -12,9 +12,10 @@ MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
 MY_PA="ultimate"
 MY_PAS="IU"
+MY_BUILD="133.193"
 
-MY_BUILD="$(delete_all_version_separators)"
-MY_BUILD=${MY_BUILD/pre/.}
+#MY_BUILD="$(delete_all_version_separators)"
+#MY_BUILD=${MY_BUILD/pre/.}
 
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
