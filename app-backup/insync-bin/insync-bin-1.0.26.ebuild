@@ -6,13 +6,14 @@ EAPI=5
 
 DESCRIPTION="Advanced cross-platform Google Drive client"
 HOMEPAGE="https://www.insynchq.com/"
+MAGIC="31705"
 SRC_URI="
-	x86?      ( http://s.insynchq.com/builds/insync_${PV}_i386.deb )
-	amd64?    ( http://s.insynchq.com/builds/insync_${PV}_amd64.deb )
-	nautilus? ( http://s.insynchq.com/builds/insync-nautilus_${PV}_all.deb )
-	dolphin?  ( http://s.insynchq.com/builds/insync-dolphin_${PV}_all.deb )
-	thunar?   ( http://s.insynchq.com/builds/insync-thunar_${PV}_all.deb )
-	caja?     ( http://s.insynchq.com/builds/insync-caja_${PV}_all.deb )"
+	x86?      ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}_i386.deb )
+	amd64?    ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}_amd64.deb )
+	nautilus? ( http://s.insynchq.com/builds/insync-nautilus_${PV}.${MAGIC}_all.deb )
+	dolphin?  ( http://s.insynchq.com/builds/insync-dolphin_${PV}.${MAGIC}_all.deb )
+	thunar?   ( http://s.insynchq.com/builds/insync-thunar_${PV}.${MAGIC}_all.deb )
+	caja?     ( http://s.insynchq.com/builds/insync-caja_${PV}.${MAGIC}_all.deb )"
 
 SLOT="0"
 KEYWORDS="-* ~x86 ~amd64"
@@ -30,21 +31,21 @@ src_unpack() {
 	cd "${S}"
 
 	if use amd64 ; then
-		unpack insync_"${PV}"_amd64.deb
+		unpack insync_"${PV}.${MAGIC}"_amd64.deb
 	else
-		unpack insync_"${PV}"_i386.deb
+		unpack insync_"${PV}.${MAGIC}"_i386.deb
 	fi
 
 	unpack ./data.tar.gz
 
 	if use nautilus ; then
-		unpack insync-nautilus_"${PV}"_all.deb
+		unpack insync-nautilus_"${PV}.${MAGIC}"_all.deb
 	elif use dolphin ; then
-		unpack insync-dolphin_"${PV}"_all.deb
+		unpack insync-dolphin_"${PV}.${MAGIC}"_all.deb
 	elif use thunar ; then
-		unpack insync-thunar_"${PV}"_all.deb
+		unpack insync-thunar_"${PV}.${MAGIC}"_all.deb
 	elif use caja ; then
-		unpack insync-caja_"${PV}"_all.deb
+		unpack insync-caja_"${PV}.${MAGIC}"_all.deb
 	fi
 
 	unpack ./data.tar.gz
