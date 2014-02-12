@@ -75,7 +75,7 @@ src_install() {
 	make_wrapper "${exe}" "/opt/${P}/bin/${PN1}.sh"
 	make_desktop_entry ${exe} "IntelliJ IDEA ${PV}" "${exe}" "Development;IDE"
 	# Protect idea conf on upgrade
-	env_file="${T}/25idea-${SLOT}"
+	env_file="${T}/25${PN}-${SLOT}"
 	echo "CONFIG_PROTECT=\"\${CONFIG_PROTECT} /etc/idea/conf\"" > "${env_file}"  || die
 	doenvd "${env_file}"
 }
