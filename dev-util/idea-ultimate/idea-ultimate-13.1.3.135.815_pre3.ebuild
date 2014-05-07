@@ -49,7 +49,7 @@ src_prepare() {
 src_install() {
 	local dir="/opt/${P}"
 	local exe="${PN}-${SLOT}"
-	newconfd "${FILESDIR}/config-${PN2}-${SLOT}" ${PN}-${SLOT}
+	newconfd "${FILESDIR}/config-${PN}-${SLOT}" ${PN}-${SLOT}
 	# config files
 	insinto "/etc/idea"
 	mv bin/idea.properties bin/${PN}-${SLOT}.properties
@@ -65,6 +65,7 @@ src_install() {
 	doins bin/${PN}-${SLOT}.vmoptions
 	rm bin/${PN}-${SLOT}.vmoptions
 	ln -s /etc/idea/${PN}-${SLOT}.properties bin/idea.properties
+	ln -s /etc/idea/${PN}-${SLOT}.vmoptions bin/idea.vmoptions
 	# idea itself
 	insinto "${dir}"
 	doins -r *
