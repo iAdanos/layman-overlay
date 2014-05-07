@@ -5,7 +5,7 @@
 EAPI=4
 inherit eutils versionator
 
-SLOT="$(get_major_version)"
+SLOT="eap"
 RDEPEND=">=virtual/jdk-1.6"
 
 PN1=${PN%-*}
