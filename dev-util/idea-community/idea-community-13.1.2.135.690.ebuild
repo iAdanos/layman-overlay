@@ -43,28 +43,28 @@ KEYWORDS="~x86 ~amd64"
 S="${WORKDIR}/${PN1}-${PNS^^}-${MY_PV}"
 
 src_prepare() {
-	epatch ${FILESDIR}/idea-${SLOT}.sh.patch || die
+	epatch ${FILESDIR}/${PN}-${SLOT}.sh.patch || die
 }
 
 src_install() {
 	local dir="/opt/${P}"
 	local exe="${PN}-${SLOT}"
-	newconfd "${FILESDIR}/config-${SLOT}" idea-${SLOT}
+	newconfd "${FILESDIR}/config-${PN2}-${SLOT}" ${PN}-${SLOT}
 	# config files
 	insinto "/etc/idea"
-	mv bin/idea.properties bin/idea-${SLOT}.properties
-	doins bin/idea-${SLOT}.properties
-	rm bin/idea-${SLOT}.properties
+	mv bin/idea.properties bin/${PN}-${SLOT}.properties
+	doins bin/${PN}-${SLOT}.properties
+	rm bin/${PN}-${SLOT}.properties
 	case $ARCH in
 		amd64|ppc64)
 			cat bin/idea64.vmoptions > bin/idea.vmoptions
 			rm bin/idea64.vmoptions
 			;;
 	esac
-	mv bin/idea.vmoptions bin/idea-${SLOT}.vmoptions
-	doins bin/idea-${SLOT}.vmoptions
-	rm bin/idea-${SLOT}.vmoptions
-	ln -s /etc/idea/idea-${SLOT}.properties bin/idea.properties
+	mv bin/idea.vmoptions bin/${PN}-${SLOT}.vmoptions
+	doins bin/${PN}-${SLOT}.vmoptions
+	rm bin/${PN}-${SLOT}.vmoptions
+	ln -s /etc/idea/${PN}-${SLOT}.properties bin/idea.properties
 	# idea itself
 	insinto "${dir}"
 	doins -r *
