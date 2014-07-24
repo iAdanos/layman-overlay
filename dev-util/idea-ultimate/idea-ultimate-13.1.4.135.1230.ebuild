@@ -31,7 +31,7 @@ if [ -z $MY_PRE ]; then
 			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-2).tar.gz"
 		fi
 	else
-		SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-3).tar.gz"
+		SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-3)b.tar.gz"
 	fi
 else
 	SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-${MY_PV}.tar.gz"
@@ -41,7 +41,6 @@ LICENSE="IntelliJ-IDEA"
 IUSE=""
 KEYWORDS="~x86 ~amd64"
 S="${WORKDIR}/${PN1}-${PNS^^}-${MY_PV}"
-S="${WORKDIR}/${PN1}-${PNS^^}-135.1229"
 
 src_prepare() {
 	epatch ${FILESDIR}/${PN}-${SLOT}.sh.patch || die
