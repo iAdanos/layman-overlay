@@ -41,6 +41,7 @@ LICENSE="IntelliJ-IDEA"
 IUSE=""
 KEYWORDS="~x86 ~amd64"
 S="${WORKDIR}/${PN1}-${PNS^^}-${MY_PV}"
+S="${WORKDIR}/${PN1}-${PNS^^}-135.1229"
 
 src_prepare() {
 	epatch ${FILESDIR}/${PN}-${SLOT}.sh.patch || die
