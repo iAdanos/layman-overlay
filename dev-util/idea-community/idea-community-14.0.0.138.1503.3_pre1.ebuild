@@ -12,8 +12,8 @@ PN1=${PN%-*}
 PN2=${PN#*-}
 PNS=${PN1:0:1}${PN2:0:1}
 
-MY_PV="$(get_version_component_range 4-5)"
-MY_PRE="$(get_version_component_range 6-6)"
+MY_PV="$(get_version_component_range 4-6)"
+MY_PRE="$(get_version_component_range 7-7)"
 MY_PRE=${MY_PRE/pre/}
 
 RESTRICT="strip mirror"
