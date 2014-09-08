@@ -24,7 +24,7 @@ econf $(use_enable lua liblua ) --with-progname=telegram-cli
 }
 
 src_install() {
-newbin telegram telegram-cli
+#newbin telegram telegram-cli
 
 insinto /etc/telegram-cli/
 newins tg-server.pub server.pub
