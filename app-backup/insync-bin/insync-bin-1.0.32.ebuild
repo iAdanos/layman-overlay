@@ -6,14 +6,14 @@ EAPI=5
 
 DESCRIPTION="Advanced cross-platform Google Drive client"
 HOMEPAGE="https://www.insynchq.com/"
-MAGIC="31750"
+MAGIC="31767"
 SRC_URI="
-	x86?      ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}_i386.deb )
-	amd64?    ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}_amd64.deb )
-	nautilus? ( http://s.insynchq.com/builds/insync-nautilus_${PV}.${MAGIC}_all.deb )
-	dolphin?  ( http://s.insynchq.com/builds/insync-dolphin_${PV}.${MAGIC}_all.deb )
-	thunar?   ( http://s.insynchq.com/builds/insync-thunar_${PV}.${MAGIC}_all.deb )
-	caja?     ( http://s.insynchq.com/builds/insync-caja_${PV}.${MAGIC}_all.deb )"
+	x86?      ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}-trusty_i386.deb )
+	amd64?    ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}-trusty_amd64.deb )
+	nautilus? ( http://s.insynchq.com/builds/insync-nautilus_${PV}.${MAGIC}-precise_all.deb )
+	dolphin?  ( http://s.insynchq.com/builds/insync-dolphin_${PV}.${MAGIC}-precise_all.deb )
+	thunar?   ( http://s.insynchq.com/builds/insync-thunar_${PV}.${MAGIC}-precise_all.deb )
+	caja?     ( http://s.insynchq.com/builds/insync-caja_${PV}.${MAGIC}-precise_all.deb )"
 
 SLOT="0"
 KEYWORDS="-* ~x86 ~amd64"
