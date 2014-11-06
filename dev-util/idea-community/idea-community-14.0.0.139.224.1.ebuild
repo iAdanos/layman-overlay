@@ -12,8 +12,8 @@ PN1=${PN%-*}
 PN2=${PN#*-}
 PNS=${PN1:0:1}${PN2:0:1}
 
-MY_PV="$(get_version_component_range 4-5)"
-MY_PRE="$(get_version_component_range 6-6)"
+MY_PV="$(get_version_component_range 4-6)"
+MY_PRE="$(get_version_component_range 7-7)"
 MY_PRE=${MY_PRE/pre/}
 
 RESTRICT="strip mirror"
@@ -24,9 +24,8 @@ HOMEPAGE="http://jetbrains.com/idea/"
 
 if [ -z $MY_PRE ]; then
 	VER=($(get_all_version_components))
-	#todo: totally messed and uncommented if stucture: CLEAN UP!!
 	if [[ "${VER[2]}" == "0" ]]; then
-		if [[ "${VER[2]}" == "0" ]]; then
+		if [[ "${VER[4]}" == "0" ]]; then
 			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-1).tar.gz"
 		else
 			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-2).tar.gz"
