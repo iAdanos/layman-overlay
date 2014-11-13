@@ -28,7 +28,7 @@ if [ -z $MY_PRE ]; then
 		if [[ "${VER[4]}" == "0" ]]; then
 			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-1).tar.gz"
 		else
-			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-2).tar.gz"
+			SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-3).tar.gz"
 		fi
 	else
 		SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-3).tar.gz"
