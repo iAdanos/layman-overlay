@@ -8,7 +8,7 @@ inherit autotools
 
 DESCRIPTION="extensions for cinnamon's file-manager nemo"
 HOMEPAGE=""
-SRC_URI="https://github.com/muzena/nemo-extensions/archive/2.2.x.tar.gz"
+SRC_URI="https://github.com/linuxmint/nemo-extensions/archive/2.2.x.zip"
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64"
@@ -17,7 +17,7 @@ KEYWORDS="~amd64"
 # -compare -dropbox -foldercolor -gtkhash -imageconverter -mediacolumns -pastebin -preview -python -rabbitvcs -repairer -seahorse -share -terminal
 
 # Tested extensions
-IUSE="fileroller compare dropbox foldercolor gtkhash imageconverter mediacolumns pastebin preview python rabbitvcs repairer seahorse share terminal"
+IUSE="fileroller compare dropbox foldercolor gtkhash imageconverter mediacolumns pastebin preview -python rabbitvcs repairer seahorse share terminal"
 MODULES=${IUSE//-/}
 
 DEPEND="( =gnome-extra/nemo-2* )
@@ -27,7 +27,7 @@ RDEPEND="${DEPEND}"
 
 src_unpack() {
 	unpack ${A}
-	cd "${S}"
+    cd "${S}"
 	mv ${PN}-2.2.x ${P}
 }
 
