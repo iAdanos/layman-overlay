@@ -37,7 +37,7 @@ else
 	SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-${MY_PV}.tar.gz"
 fi
 
-		SRC_URI="http://download.jetbrains.com/${PN1}/${PN1}${PNS^^}-$(get_version_component_range 1-1)-PublicPreview.tar.gz"
+
 LICENSE="IntelliJ-IDEA"
 IUSE=""
 KEYWORDS="~x86 ~amd64"
