@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="Advanced cross-platform Google Drive client"
 HOMEPAGE="https://www.insynchq.com/"
-MAGIC="35178"
+MAGIC="35198"
 SRC_URI="
 	x86?      ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}-trusty_i386.deb )
 	amd64?    ( http://s.insynchq.com/builds/insync_${PV}.${MAGIC}-trusty_amd64.deb )"
