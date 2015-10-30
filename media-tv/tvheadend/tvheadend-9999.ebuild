@@ -23,8 +23,6 @@ DEPEND="dev-libs/openssl
 RDEPEND="${DEPEND}
 	xmltv? ( media-tv/xmltv )"
 
-DOCS=( README )
-
 pkg_setup() {
 	enewuser tvheadend -1 -1 /dev/null video
 }
