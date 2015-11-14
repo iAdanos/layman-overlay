@@ -4,6 +4,7 @@ app-editors/komodo-edit-bin 7.1.3: Freeware advanced editor for dynamic and Web 
 app-misc/secure-delete 3.1-r3: Secure file/disk/swap/memory erasure utilities
 app-misc/solaar 0.9.1: Solaar is a Linux device manager for Logitech's Unifying Receiver peripherals
 app-portage/gcruft 0.1-r1 0.1.1: helps finding orphaned files on a gentoo system
+dev-util/adobe-air-runtime 2.6-r1: Adobe AIR runtime
 dev-util/gource 0.38-r1: A software version control visualization tool
 dev-util/idea-community 13.1.5.135.1289 14.0.1.139.225.3 14.0.2.139.658.4_pre1: IntelliJ IDEA is an intelligent Java IDE
 dev-util/idea-ultimate 13.1.5.135.1289 14.0.1.139.225.3 14.0.2.139.658.4_pre1: IntelliJ IDEA is an intelligent Java IDE
@@ -14,4 +15,5 @@ media-tv/oscam 9999: OSCam is an Open Source Conditional Access Module software
 media-tv/tvheadend 9999: A combined DVB receiver, Digital Video Recorder and Live TV streaming server
 net-analyzer/sslstrip 0.9: sslstrip remove https and forwards http
 net-im/telegram-cli 9999: Command line interface client for Telegram
+net-misc/devolo-dlan-cockpit 4.3.1: devolo-dlan-cockpit is aconfiguration software for dLAN-networks
 net-misc/wicd 9999: A lightweight wired and wireless network manager for Linux
