@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install postinst preinst prepare unpack
+DEPEND=dev-util/cmake || ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync
+DESCRIPTION=OSCam is an Open Source Conditional Access Module software
+EAPI=4
+HOMEPAGE=http://streamboard.gmc.to:8001/
+IUSE=protocol_camd33 protocol_camd35 protocol_camd35_tcp protocol_newcamd protocol_cccam protocol_gbox protocol_radegast protocol_serial protocol_constcw protocol_pandora reader_nagra reader_irdeto reader_conax reader_cryptoworks reader_seca reader_viaccess reader_videoguard reader_dre reader_tongfang reader_bulcrypt ac csp debug doc dvb gbox ipv6 irdeto lb lcd monitor pcsc +reader +ssl usb +www
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=dev-util/cmake dev-libs/openssl usb? ( dev-libs/libusb ) pcsc? ( sys-apps/pcsc-lite )
+REQUIRED_USE=protocol_camd35_tcp? ( protocol_camd35 ) reader_nagra? ( reader ) reader_irdeto? ( reader irdeto ) reader_conax? ( reader ) reader_cryptoworks? ( reader ) reader_seca? ( reader ) reader_viaccess? ( reader ) reader_videoguard? ( reader ) reader_dre? ( reader ) reader_tongfang? ( reader ) reader_bulcrypt? ( reader )
+RESTRICT=nomirror
+SLOT=0
+_eclass_exported_funcs=pkg_preinst:subversion pkg_postinst:- src_unpack:subversion src_prepare:subversion src_configure:- src_compile:- src_install:-
+_eclasses_=eutils	f20548a2f7b0128068388cd2ec26708a	multilib	3972ca401cf7dbb430df9995f5d8d580	subversion	4fee0a764150bb4dda27ed4d2c4ed7ce	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_md5_=5dc60091c34c63c9081d373b24a912bf
