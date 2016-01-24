@@ -17,3 +17,4 @@ net-analyzer/sslstrip 0.9: sslstrip remove https and forwards http
 net-im/telegram-cli 9999: Command line interface client for Telegram
 net-misc/devolo-dlan-cockpit 4.3.1: devolo-dlan-cockpit is aconfiguration software for dLAN-networks
 net-misc/wicd 9999: A lightweight wired and wireless network manager for Linux
+x11-drivers/nvidia-drivers 361.18-r2: NVIDIA Accelerated Graphics Driver
