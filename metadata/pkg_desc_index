@@ -1,6 +1,0 @@
-app-backup/insync-bin 1.3.8: Advanced cross-platform Google Drive client
-app-misc/secure-delete 3.1-r3: Secure file/disk/swap/memory erasure utilities
-app-misc/solaar 0.9.1: Solaar is a Linux device manager for Logitech's Unifying Receiver peripherals
-app-portage/gcruft 0.1-r1 0.1.1: helps finding orphaned files on a gentoo system
-gnome-extra/nemo-extensions 2.2.4: extensions for cinnamon's file-manager nemo
-net-im/telegram-cli 9999: Command line interface client for Telegram
