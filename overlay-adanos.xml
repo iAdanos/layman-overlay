@@ -1,0 +1,11 @@
+<repositories encoding="unicode" version="1.1">
+  <repo priority="50" quality="experimental">
+    <name>adanos</name>
+    <description>Gentoo overlay with crutches</description>
+    <owner>
+      <email>iadanos@narod.ru</email>
+      <name>iAdanos</name>
+    </owner>
+    <source type="git">https://github.com/iAdanos/layman-overlay.git</source>
+  </repo>
+</repositories>
