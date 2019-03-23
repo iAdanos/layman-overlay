@@ -27,3 +27,5 @@ https://devmanual.gentoo.org/ebuild-writing/index.html
 https://devmanual.gentoo.org/ebuild-writing/variables/
 https://wiki.gentoo.org/wiki/Basic_guide_to_write_Gentoo_Ebuilds
 https://devmanual.gentoo.org/function-reference/install-functions/index.html
+
+http://abeni.sourceforge.net/docs/ebuild-quick-reference.html

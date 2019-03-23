@@ -17,14 +17,14 @@ SRC_URI="
 	amd64?    ( ${MAIN_INSTALLER_STRING}-amd64.deb )"
 
 SLOT="0"
-KEYWORDS="-* ~x86 ~amd64"
-IUSE="systemd"
+KEYWORDS="~x86 ~amd64"
+IUSE="systemd libuuid"
 DEPEND="sys-devel/binutils
 	sys-apps/grep
 	app-shells/bash
 	sys-libs/glibc
 	sys-devel/gcc[cxx]
-	sys-libs/libuuid
+	libuuid? ( sys-libs/libuuid ) : ( sys-apps/util-linux )
 	sys-process/procps
 	dev-libs/openssl"
 RDEPEND="${DEPEND}"
