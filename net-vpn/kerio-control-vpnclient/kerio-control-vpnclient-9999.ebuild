@@ -24,7 +24,8 @@ DEPEND="sys-devel/binutils
 	app-shells/bash
 	sys-libs/glibc
 	sys-devel/gcc[cxx]
-	libuuid? ( sys-libs/libuuid ) : ( sys-apps/util-linux )
+	libuuid? ( sys-libs/libuuid )
+	!libuuid? ( sys-apps/util-linux )
 	sys-process/procps
 	dev-libs/openssl"
 RDEPEND="${DEPEND}"
