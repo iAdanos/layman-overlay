@@ -20,12 +20,12 @@ https://gpo.zugaina.org/
 About custom overlays:
 
 https://wiki.gentoo.org/wiki/Custom_repository
-https://wiki.gentoo.org/wiki/Layman#Adding_custom_repositories
+https://wiki.gentoo.org/wiki/Layman
 https://wiki.gentoo.org/wiki/Project:Overlays
 
-https://devmanual.gentoo.org/ebuild-writing/index.html
-https://devmanual.gentoo.org/ebuild-writing/variables/
 https://wiki.gentoo.org/wiki/Basic_guide_to_write_Gentoo_Ebuilds
-https://devmanual.gentoo.org/function-reference/install-functions/index.html
+https://devmanual.gentoo.org/ebuild-writing/index.html
+https://devmanual.gentoo.org/general-concepts/index.html
+https://devmanual.gentoo.org/function-reference/index.html
 
 http://abeni.sourceforge.net/docs/ebuild-quick-reference.html

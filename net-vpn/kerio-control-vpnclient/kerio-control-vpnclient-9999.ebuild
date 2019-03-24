@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI="7"
 
 DESCRIPTION="Kerio Control VPN Client
  Internet access management for corporate networks."
@@ -9,7 +9,7 @@ HOMEPAGE="https://www.kerio.com/"
 LICENSE="no-source-code"
 
 MAIN_INSTALLER_STRING="http://download.kerio.com/eu/dwn/${PN}-linux"
-CFGFILE="${ROOT}/etc/kerio-kvc.conf"
+CFGFILE="/etc/kerio-kvc.conf"
 SERVICE_NAME="kerio-kvc"
 
 SRC_URI="
@@ -29,18 +29,44 @@ DEPEND="sys-devel/binutils
 	sys-process/procps
 	dev-libs/openssl"
 RDEPEND="${DEPEND}"
+CONFIG_PROTECT="${CFGFILE}"
 
 src_unpack() {
-	pwd
-	find ../
+
 	ar x ${DISTDIR}/${A}
+
 	for ARCHIVE in $(ls | grep \.tar); do 
 		mkdir ${ARCHIVE%%.*}
 		cd ${ARCHIVE%%.*}
 		unpack ../${ARCHIVE}
 		cd ../
 	done
+
 	mkdir -p "${S}" # Without this src_prepare fails
+
+}
+
+src_prepare() {
+
+	S=${WORKDIR}/data
+
+	cat > "${S}/${CFGFILE}" << EOF
+<config>
+  <connections>
+    <connection type="persistent">
+      <server>SERVER_ADDRESS</server>
+      <port>PORT</port>
+      <username>USERNAME</username>
+      <password>XOR:\$(PASSWORD="YOUR PASSWORD"; for i in \`echo -n "\$PASSWORD" | od -t d1 -A n\`; do XOR=\$(printf "%s%02x" "\$XOR" \$((i ^ 85))); done; echo \${XOR})</password>
+      <fingerprint>\$(echo | openssl s_client -connect SERVER_ADDRESS:PORT | openssl x509 -fingerprint -md5 -noout | sed s'/.*=//')</fingerprint>
+      <active>1</active>
+    </connection>
+  </connections>
+</config>
+EOF
+
+	eapply_user
+
 }
 
 src_install() {
@@ -69,6 +95,9 @@ src_install() {
 		insinto /etc/init.d
 		doins ${S}/etc/init.d/${SERVICE_NAME}
 	fi
+
+	insinto /etc
+	doins ${S}/${CFGFILE}
 	
 }
 
@@ -76,28 +105,15 @@ pkg_postinst() {
 
 	. ${ROOT}/lib/systemd/system-generators/kerio-kvc.generator
 
-	cat > "$CFGFILE" << EOF
-<config>
-  <connections>
-    <connection type="persistent">
-      <server>SERVER_ADDRESS</server>
-      <port>PORT</port>
-      <username>USERNAME</username>
-      <password>XOR:\$(PASSWORD="YOUR PASSWORD"; for i in \`echo -n "\$PASSWORD" | od -t d1 -A n\`; do XOR=\$(printf "%s%02x" "\$XOR" \$((i ^ 85))); done; echo \${XOR})</password>
-      <fingerprint>\$(echo | openssl s_client -connect SERVER_ADDRESS:PORT | openssl x509 -fingerprint -md5 -noout | sed s'/.*=//')</fingerprint>
-      <active>1</active>
-    </connection>
-  </connections>
-</config>
-EOF
-
 	chmod 0600 "$CFGFILE"
 	LDCONFIG_NOTRIGGER=y ldconfig
 
 	pkg_info
+
 }
 
 pkg_info() {
+
 	elog "To configure Kerio Control VPN Client edit"
 	elog "* ${CFGFILE}"
 	elog " "
@@ -114,21 +130,27 @@ pkg_info() {
 	elog " "
 	elog "Get server fingerprint to put in ${CFGFILE}:"
 	elog "echo \"Server fingerprint: \$(echo | openssl s_client -connect SERVER_ADDRESS:PORT | openssl x509 -fingerprint -md5 -noout | sed s'/.*=//')\""
+
 }
 
 pkg_prerm() {
+
 	if use systemd; then
 		systemctl stop ${SERVICE_NAME} || exit $?
 	else
 		rc-config stop ${SERVICE_NAME} || exit $?
 	fi
+
 }
 
 pkg_postrm() {
+
 	ldconfig
+
 	if use systemd ; then
 		systemctl --system daemon-reload >/dev/null || true
 	else
 		rc-config delete ${SERVICE_NAME} >/dev/null || true
 	fi
+
 }
