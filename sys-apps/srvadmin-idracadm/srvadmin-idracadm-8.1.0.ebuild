@@ -29,6 +29,9 @@ src_unpack() {
 
 src_install() {
 	cp -pPR "${WORKDIR}"/{opt,etc} "${D}"/ || die "Installation failed"
+	mkdir -p "${D}"/usr/local/bin
+	ln -s /opt/dell/srvadmin/bin/idracadm "${D}"/usr/local/bin/racadm
 
 	insinto / && doins -r / || die
+
 }
