@@ -24,10 +24,10 @@ src_install() {
 
 	S=${WORKDIR}/squashfs-root
 
-	mkdir -p ${D}/opt/${P}
+	mkdir -p ${D}/opt/${PN}
 	mkdir -p ${D}/usr/local/bin
 
-	cp -pPR $(ls -d ${S}/* | grep -v "usr") ${D}/opt/${P}
+	cp -pPR $(ls -d ${S}/* | grep -v "usr") ${D}/opt/${PN}
 	cp -pPR ${S}/usr ${D}/
 
 	# Update dirs permissions
@@ -40,12 +40,12 @@ src_install() {
 			LINK_NAME=$(awk '{ print $(NF-2) }' <<< $line)
 
 			if [[ ! -z "$(grep ^usr/ <<< ${LINK_DEST})" ]]; then 
-				ln -sf /${LINK_DEST} ${D}/opt/${P}/${LINK_NAME}
+				ln -sf /${LINK_DEST} ${D}/opt/${PN}/${LINK_NAME}
 			fi
 		fi
-	done <<< `ls -lah ${D}/opt/${P}`
+	done <<< `ls -lah ${D}/opt/${PN}`
 
-	ln -sf /opt/${P}/AppRun ${D}/usr/local/bin/${PN}
+	ln -sf /opt/${PN}/AppRun ${D}/usr/local/bin/${PN}
 
 	insinto / && doins -r / || die
 
