@@ -33,8 +33,9 @@ src_install() {
   insinto / && doins -r / || die
 
   dosym /opt/Bitwarden/bitwarden /usr/bin/bitwarden || die
+}
 
+pkg_postinst() {
   xdg_desktop_database_update
   xdg_mimeinfo_database_update
-
 }
